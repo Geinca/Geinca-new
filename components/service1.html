@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Digital Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            --gradient-peach: linear-gradient(135deg, #fd79a8 0%, #fab1a0 100%);
+            --gradient-blue: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+            --gradient-yellow: linear-gradient(135deg, #fdcb6e 0%, #ffeaa7 100%);
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .digital-services-page {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f9f9ff 0%, #f0f2ff 50%, #fef0ff 100%);
+        }
+
+        .ds-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Services Section */
+        .ds-services-section {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ds-section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .ds-section-header.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ds-section-subtitle {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .ds-section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-peach);
+            border-radius: 3px;
+        }
+
+        .ds-section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--text-dark) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .ds-section-description {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Service Cards */
+        .ds-services-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .ds-service-card {
+            background: var(--white);
+            border-radius: 70px 70px 25px 25px;
+            padding: 45px 35px;
+            width: 360px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ds-service-card.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .ds-service-card:hover {
+            transform: translateY(-10px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .ds-service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .ds-card-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 36px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+
+        .ds-service-card:hover .ds-card-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .ds-service-card:nth-child(1) .ds-card-icon {
+            background: var(--gradient-blue);
+        }
+
+        .ds-service-card:nth-child(2) .ds-card-icon {
+            background: var(--gradient-purple);
+        }
+
+        .ds-service-card:nth-child(3) .ds-card-icon {
+            background: var(--gradient-peach);
+        }
+
+        .ds-card-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .ds-card-description {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .ds-card-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 35px;
+        }
+
+        .ds-card-features li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .ds-card-features li:hover {
+            transform: translateX(5px);
+        }
+
+        .ds-card-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .ds-card-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-purple);
+            color: var(--white);
+            margin: 0 auto;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+            font-size: 20px;
+        }
+
+        .ds-card-action:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--gradient-peach);
+            box-shadow: 0 15px 30px rgba(253, 121, 168, 0.4);
+        }
+
+        /* Animation Delays */
+        .ds-service-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        .ds-service-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        .ds-service-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        /* Floating Elements */
+        .ds-floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .ds-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .ds-shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            bottom: -50px;
+            right: -50px;
+            animation: float 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .ds-services-grid {
+                gap: 25px;
+            }
+            
+            .ds-service-card {
+                width: 320px;
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .ds-section-title {
+                font-size: 42px;
+            }
+            
+            .ds-section-description {
+                font-size: 17px;
+            }
+
+            .ds-service-card {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ds-services-section {
+                padding: 90px 0;
+            }
+            
+            .ds-services-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .ds-service-card {
+                width: 100%;
+                max-width: 450px;
+            }
+
+            .ds-section-header {
+                margin-bottom: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .ds-section-title {
+                font-size: 36px;
+            }
+            
+            .ds-section-subtitle {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+            
+            .ds-service-card {
+                padding: 35px 25px;
+                border-radius: 60px 60px 20px 20px;
+            }
+            
+            .ds-card-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .ds-card-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="digital-services-page">
+    <section class="ds-services-section">
+        <div class="ds-floating-shape ds-shape-1"></div>
+        <div class="ds-floating-shape ds-shape-2"></div>
+        
+        <div class="ds-container">
+            <div class="ds-section-header">
+                <span class="ds-section-subtitle">Our Expertise</span>
+                <h2 class="ds-section-title" style="color: #000;">Premium Digital Services</h2>
+                <p class="ds-section-description"  style="color: #000;">We deliver cutting-edge solutions tailored to elevate your digital presence and business performance.</p>
+            </div>
+            
+            <div class="ds-services-grid">
+                <!-- Service 1 -->
+                <div class="ds-service-card">
+                    <div class="ds-card-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="ds-card-title">Software Development</h3>
+                    <p class="ds-card-description" style="color: #2d3436;">Beautiful, intuitive interfaces that enhance user engagement and drive conversions.</p>
+                    <ul class="ds-card-features">
+                        <li>Custom software solutions tailored to your business goals.</li>
+                        <li>Scalable, secure, and high-performance applications.</li>
+                        <li>Full-cycle development: planning, coding, testing, deployment</li>
+                        <li>Seamless integration with existing systems and workflows.</li>
+                    </ul>
+                    <a href="#" class="ds-card-action">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="ds-service-card">
+                    <div class="ds-card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="ds-card-title">Mobile App Development</h3>
+                    <p class="ds-card-description"style="color: #2d3436;">High-performance websites built with modern technologies for optimal results.</p>
+                    <ul class="ds-card-features">
+                        <li>Native and cross-platform app development (iOS & Android).</li>
+                        <li>Intuitive UI/UX design for enhanced user experience.</li>
+                        <li>Scalable apps built with the latest technologies.</li>
+                        <li>End-to-end development from concept to app store launch.</li>
+                    </ul>
+                    <a href="#" class="ds-card-action">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="ds-service-card">
+                    <div class="ds-card-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="ds-card-title">Web Development </h3>
+                    <p class="ds-card-description"style="color: #2d3436;">Scalable cloud infrastructure optimized for performance and security.</p>
+                    <ul class="ds-card-features">
+                        <li>Responsive and SEO-friendly websites.</li>
+                        <li>Custom web apps built for speed and performance.</li>
+                        <li>E-commerce, portfolio, and business websites tailored to needs.</li>
+                        <li>Clean code, secure architecture, and easy scalability</li>
+                    </ul>
+                    <a href="#" class="ds-card-action">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.ds-section-header, .ds-service-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('in-view');
+                } else {
+                    element.classList.remove('in-view');
+                }
+            });
+        };
+
+        // Run on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

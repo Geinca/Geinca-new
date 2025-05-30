@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCrafters | Web Dev Insights</title>
+    <style>
+        :root {
+            --primary-wd: #0077b6;
+            --secondary-wd: #023e8a;
+            --accent-wd: #90e0ef;
+            --light-wd: #f1faff;
+            --dark-wd: #1b1b1b;
+            --text-wd: #333;
+            --gray-wd: #6c757d;
+        }
+         body{
+             font-family: 'Poppins', 'Arial', sans-serif;
+         }
+        .wd-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .wd-header {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .wd-header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-wd);
+            margin-bottom: 1rem;
+        }
+
+        .wd-meta {
+            color: var(--gray-wd);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wd-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .wd-main-article {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .wd-article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .wd-article-body {
+            padding: 2rem;
+        }
+
+        .wd-article-body h2 {
+            color: var(--secondary-wd);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .wd-article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .wd-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .wd-widget {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+        }
+
+        .wd-widget-title {
+            color: var(--secondary-wd);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-wd);
+        }
+
+        .wd-recent-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .wd-recent-post {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .wd-recent-post img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .wd-recent-post h4 {
+            font-size: 0.9rem;
+        }
+
+        .wd-newsletter-form input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .wd-newsletter-form button {
+            background-color: var(--primary-wd);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .wd-newsletter-form button:hover {
+            background-color: var(--secondary-wd);
+        }
+
+        @media (max-width: 768px) {
+            .wd-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <main class="wd-container" style="padding-top: 40px;">
+        <article class="wd-content">
+            <div class="wd-main-article">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Web development" class="wd-article-image">
+                <div class="wd-article-body">
+                    <div class="wd-meta">
+                        <span>Posted on: May 17, 2025</span> |
+                        <span>Team CodeCrafters</span>
+                    </div>
+                    <h1>Modern Web Development Services: A Complete Guide</h1>
+                    <p>From building responsive websites to full-stack web apps, the landscape of web development is constantly evolving. This guide walks you through the core services that help businesses thrive online.</p>
+
+                    <h2>Popular Web Development Services</h2>
+                    <ul>
+                        <li><strong>Responsive Website Design:</strong> Mobile-first, fast, and SEO-friendly websites</li>
+                        <li><strong>Custom Web Applications:</strong> Tailor-made solutions to fit specific business workflows</li>
+                        <li><strong>eCommerce Solutions:</strong> Platforms like Shopify, WooCommerce, and custom builds</li>
+                        <li><strong>UI/UX Design:</strong> Engaging and intuitive user experiences</li>
+                        <li><strong>Website Maintenance:</strong> Regular updates, backups, and security</li>
+                    </ul>
+
+                    <h2>Benefits of Hiring a Web Development Agency</h2>
+                    <ol>
+                        <li><strong>Expertise:</strong> Get access to skilled developers and designers</li>
+                        <li><strong>Time-Saving:</strong> Focus on your core business while experts handle the tech</li>
+                        <li><strong>Custom Strategy:</strong> Tailored approach for branding, SEO, and performance</li>
+                        <li><strong>Ongoing Support:</strong> Ensure your site remains updated and secure</li>
+                    </ol>
+
+                    <p>Partnering with the right development team helps elevate your digital presence and ensures long-term success online.</p>
+                </div>
+            </div>
+
+            <aside class="wd-sidebar">
+                <div class="wd-widget">
+                    <h3 class="wd-widget-title">About Us</h3>
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="https://i.ibb.co/6RTSTbTD/g.jpg" alt="Team" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                        <div>
+                            <h4>GEINCA</h4>
+                            <p style="font-size: 0.8rem; color: var(--gray-wd);">Web Solutions Team</p>
+                        </div>
+                    </div>
+                    <p>We are a team of passionate developers and designers helping businesses go digital with innovative web and app solutions.</p>
+                </div>
+
+                <div class="wd-widget wd-recent-posts">
+                    <h3 class="wd-widget-title">Recent Posts</h3>
+                    <div class="wd-recent-post">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="UX">
+                        <h4><a href="#">UX Design Best Practices in 2025</a></h4>
+                    </div>
+                    <div class="wd-recent-post">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="eCommerce">
+                        <h4><a href="#">Choosing the Right eCommerce Platform</a></h4>
+                    </div>
+                    <div class="wd-recent-post">
+                        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="SEO">
+                        <h4><a href="#">Web Performance & SEO Tips</a></h4>
+                    </div>
+                </div>
+
+                <div class="wd-widget">
+                    <h3 class="wd-widget-title">Newsletter</h3>
+                    <p>Subscribe for latest trends & tips in web development</p>
+                    <form class="wd-newsletter-form">
+                        <input type="text" placeholder="Your Name">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </article>
+    </main>
+  <div id="footer"></div>
+ <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+   
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Professional Footer</title>
+    <style>
+        /* Base Styles */
+        .geinca-footer {
+            --geinca-primary: #2563eb;
+            --geinca-secondary: #7c3aed;
+            --geinca-dark: #1e293b;
+            --geinca-light: aqua;
+            --geinca-gray: #ffffff;
+            --geinca-accent: #ec4899;
+            
+            background-color: var(--geinca-dark);
+            color: var(--geinca-light);
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .geinca-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--geinca-primary), var(--geinca-accent));
+        }
+
+        .geinca-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+        }
+
+        /* Branding Section */
+        .geinca-brand-column {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .geinca-logo {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(45deg, var(--geinca-primary), var(--geinca-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .geinca-tagline {
+            color: var(--geinca-gray);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Navigation Sections */
+        .geinca-nav-section h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .geinca-nav-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--geinca-primary), var(--geinca-accent));
+            border-radius: 3px;
+        }
+
+        .geinca-nav-links {
+            list-style: none;
+        }
+
+        .geinca-nav-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .geinca-nav-links a {
+            color: var(--geinca-gray);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .geinca-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--geinca-light);
+            transition: width 0.3s ease;
+        }
+
+        .geinca-nav-links a:hover {
+            color: var(--geinca-light);
+        }
+
+        .geinca-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        .geinca-contact-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .geinca-contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .geinca-contact-icon {
+            margin-right: 0.75rem;
+            color: var(--geinca-primary);
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .geinca-contact-text {
+            color: var(--geinca-gray);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .geinca-contact-text a {
+            color: var(--geinca-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .geinca-contact-text a:hover {
+            color: var(--geinca-light);
+        }
+
+        /* Social Media */
+        .geinca-social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .geinca-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .geinca-social-link:hover {
+            background: linear-gradient(45deg, var(--geinca-primary), var(--geinca-accent));
+            transform: translateY(-3px);
+        }
+
+        .geinca-social-icon {
+            color: var(--geinca-light);
+            font-size: 1rem;
+        }
+
+        /* Copyright Section */
+        .geinca-copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--geinca-gray);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .geinca-brand-column {
+                grid-column: span 2;
+                text-align: left;
+                margin-bottom: 0;
+            }
+            
+            .geinca-nav-section h3::after {
+                left: 0;
+                transform: none;
+            }
+            
+            .geinca-social-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .geinca-brand-column {
+                grid-column: span 1;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <footer class="geinca-footer">
+        <div class="geinca-footer-container">
+            <div class="geinca-brand-column">
+        <img src="https://i.ibb.co/vC8sJJfY/glogo.png" alt="Nexus Logo" / style="width: 200px;">
+                <p class="geinca-tagline">Transforming digital landscapes with innovative solutions and cutting-edge technology.</p>
+            </div>
+
+            <div class="geinca-nav-section">
+                <h3>Navigation</h3>
+                <ul class="geinca-nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                      <li><a href="blogpage.html">Blog</a></li>
+                       <li><a href="contact.html">Contact us</a></li>
+                    <!-- <li><a href="#">Case Studies</a></li> -->
+                    <!-- <li><a href="#">Careers</a></li> -->
+                </ul>
+            </div>
+
+            <!-- <div class="geinca-nav-section">
+                <h3>Resources</h3>
+                <ul class="geinca-nav-links">
+                    <li><a href="blogpage.html">Blog</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Webinars</a></li>
+                </ul>
+            </div> -->
+
+            <div class="geinca-nav-section">
+                <h3>Contact</h3>
+                <div class="geinca-contact-info">
+                    <div class="geinca-contact-item">
+                        <i class="fas fa-envelope geinca-contact-icon"></i>
+                        <div class="geinca-contact-text"><a href="mailto:contact@geinca.com">info@geinca.com</a></div>
+                    </div>
+                    <div class="geinca-contact-item">
+                        <i class="fas fa-phone-alt geinca-contact-icon"></i>
+                        <div class="geinca-contact-text"><a href="tel:+91 63702 62470">+91 63702 62470 <br>Open Everyday  </a></div>
+                    </div>
+                    <div class="geinca-contact-item">
+                        <i class="fas fa-map-marker-alt geinca-contact-icon"></i>
+                        <div class="geinca-contact-text">Gada Mahaveer Nagar , Bhubaneswar, Odisha</div>
+                    </div>
+                </div>
+                <div class="geinca-social-links">
+                    <a href="#" class="geinca-social-link"><i class="fab fa-linkedin-in geinca-social-icon"></i></a>
+                    <a href="#" class="geinca-social-link"><i class="fab fa-twitter geinca-social-icon"></i></a>
+                    <a href="#" class="geinca-social-link"><i class="fab fa-github geinca-social-icon"></i></a>
+                    <a href="#" class="geinca-social-link"><i class="fab fa-dribbble geinca-social-icon"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="geinca-copyright">
+            <p>&copy; 2025 <span style="color: aqua;">GEINCA</span> Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>

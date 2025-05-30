@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEINCA</title>
+    <script src="https://kit.fontawesome.com/YOUR-FONT-AWESOME-KIT.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+     font-family: 'Poppins', 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .geinca-about-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      overflow-x: hidden;
+    }
+    
+    /* About Section */
+    .geinca-about-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .geinca-about-section.geinca-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .geinca-about-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      aspect-ratio: 16/9;
+    }
+    
+    .geinca-about-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(106, 17, 203, 0.2), rgba(37, 117, 252, 0.2));
+      z-index: 1;
+    }
+    
+    .geinca-about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .geinca-about-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .geinca-about-content {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .geinca-section-title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    
+    .geinca-section-subtitle {
+      font-size: 1.1rem;
+      color: #6a11cb;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .geinca-about-text {
+      margin-bottom: 25px;
+      color: #555;
+      font-size: 1rem;
+    }
+    
+    .geinca-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .geinca-stat-item {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      min-width: 120px;
+      flex: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .geinca-stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .geinca-stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+    
+    .geinca-stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    /* Why Choose Us Section */
+    .geinca-why-choose-us {
+      background: linear-gradient(135deg, #1a1832, #251b4a);
+      border-radius: 30px;
+      padding: 60px 40px;
+      color: white;
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.2s;
+    }
+    
+    .geinca-why-choose-us.geinca-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .geinca-why-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .geinca-reasons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .geinca-reason-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px;
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .geinca-reason-card.geinca-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .geinca-reason-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .geinca-reason-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+    }
+    
+    .geinca-reason-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .geinca-reason-text {
+      color: #d1d1e9;
+      font-size: 0.95rem;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .geinca-about-section {
+        flex-direction: column;
+      }
+      
+      .geinca-about-image {
+        max-width: 100%;
+      }
+      
+      .geinca-section-title {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .geinca-about-container {
+        padding: 40px 15px;
+      }
+      
+      .geinca-why-choose-us {
+        padding: 40px 20px;
+        border-radius: 20px;
+      }
+      
+      .geinca-reason-card {
+        min-width: 100%;
+      }
+      
+      .geinca-stat-item {
+        min-width: calc(50% - 20px);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .geinca-section-title {
+        font-size: 1.8rem;
+      }
+      
+      .geinca-stat-number {
+        font-size: 1.8rem;
+      }
+      
+      .geinca-reason-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .geinca-reason-title {
+        font-size: 1.1rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+       <div id="nav"></div>
+    <div id="aboutbanner"></div>
+  <div class="geinca-about-container">
+    <!-- About Section -->
+    <section class="geinca-about-section">
+      <div class="geinca-about-image">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geinca Team">
+      </div>
+      <div class="geinca-about-content">
+        <h3 class="geinca-section-subtitle">About Our Company</h3>
+        <h2 class="geinca-section-title">Innovating Digital Solutions Since 2015</h2>
+        <p class="geinca-about-text">
+          Geinca is a leading digital solutions provider dedicated to helping businesses thrive in the digital landscape. 
+          Founded in 2015, we've grown from a small startup to a trusted partner for over 200 clients worldwide.
+        </p>
+        <p class="geinca-about-text">
+          Our team of passionate professionals combines technical expertise with creative thinking to deliver solutions 
+          that drive real business results. We believe in building long-term relationships with our clients by 
+          understanding their unique needs and delivering beyond expectations.
+        </p>
+        <div class="geinca-stats">
+          <div class="geinca-stat-item">
+            <div class="geinca-stat-number">200+</div>
+            <div class="geinca-stat-label">Happy Clients</div>
+          </div>
+          <div class="geinca-stat-item">
+            <div class="geinca-stat-number">50+</div>
+            <div class="geinca-stat-label">Team Members</div>
+          </div>
+          <div class="geinca-stat-item">
+            <div class="geinca-stat-number">300+</div>
+            <div class="geinca-stat-label">Projects Completed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section class="geinca-why-choose-us">
+      <div class="geinca-why-title">
+        <h3 class="geinca-section-subtitle">Our Advantages</h3>
+        <h2 class="geinca-section-title">Why Choose Geinca</h2>
+      </div>
+      <div class="geinca-reasons">
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3 class="geinca-reason-title">Innovative Approach</h3>
+          <p class="geinca-reason-text">
+            We stay ahead of industry trends to deliver cutting-edge solutions that give your business a competitive edge.
+          </p>
+        </div>
+        
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="geinca-reason-title">Expert Team</h3>
+          <p class="geinca-reason-text">
+            Our team consists of certified professionals with diverse expertise across all digital domains.
+          </p>
+        </div>
+        
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3 class="geinca-reason-title">Client-Centric</h3>
+          <p class="geinca-reason-text">
+            Your success is our priority. We tailor our services to meet your specific business objectives.
+          </p>
+        </div>
+        
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3 class="geinca-reason-title">Timely Delivery</h3>
+          <p class="geinca-reason-text">
+            We respect deadlines and deliver projects on time without compromising quality.
+          </p>
+        </div>
+        
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="geinca-reason-title">Quality Assurance</h3>
+          <p class="geinca-reason-text">
+            Rigorous testing processes ensure flawless performance and security of all our solutions.
+          </p>
+        </div>
+        
+        <div class="geinca-reason-card">
+          <div class="geinca-reason-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="geinca-reason-title">24/7 Support</h3>
+          <p class="geinca-reason-text">
+            Our dedicated support team is always available to address your concerns and queries.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+      <div id="footer"></div>
+ <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // About section animation
+      const aboutSection = document.querySelector('.geinca-about-section');
+      const whyChooseUs = document.querySelector('.geinca-why-choose-us');
+      const reasonCards = document.querySelectorAll('.geinca-reason-card');
+      
+      // Function to check if element is in viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75
+        );
+      }
+      
+      // Function to handle scroll animations
+      function handleScrollAnimations() {
+        if (isInViewport(aboutSection)) {
+          aboutSection.classList.add('geinca-fade-in');
+        }
+        
+        if (isInViewport(whyChooseUs)) {
+          whyChooseUs.classList.add('geinca-fade-in');
+          
+          // Animate reason cards with staggered delay
+          reasonCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('geinca-fade-in');
+            }, index * 100);
+          });
+        }
+      }
+      
+      // Initial check on load
+      handleScrollAnimations();
+      
+      // Check on scroll
+      window.addEventListener('scroll', handleScrollAnimations);
+      
+      // Trigger animations when resizing (in case elements become visible)
+      window.addEventListener('resize', handleScrollAnimations);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+  

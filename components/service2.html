@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services - Geinca</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .geinca-services-container {
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #1a1832, #251b4a);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .geinca-services-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .geinca-services-header h2 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .geinca-services-header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #d1d1e9;
+      font-weight: 300;
+    }
+
+    .geinca-services-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .geinca-phone-mockup {
+      width: 300px;
+      height: 600px;
+      background: #111;
+      border-radius: 40px;
+      border: 10px solid #333;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      margin: 0 30px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .geinca-phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2b2d42, #1a1a2e);
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .geinca-phone-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.9;
+      background: url('images/3.jpeg') center/cover no-repeat;
+    }
+    
+    .geinca-phone-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* background: linear-gradient(135deg, rgba(106, 17, 203, 0.3), rgba(37, 117, 252, 0.3)); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .geinca-services-column {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+    }
+
+    .geinca-service-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .geinca-service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .geinca-service-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    
+    .geinca-service-card:hover::before {
+      opacity: 1;
+    }
+
+    .geinca-service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #fff;
+      position: relative;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .geinca-service-card h3 i {
+      color: #6a11cb;
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .geinca-service-card:hover h3 i {
+      transform: scale(1.2);
+      color: #2575fc;
+    }
+
+    .geinca-service-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      transition: width 0.3s ease;
+    }
+    
+    .geinca-service-card:hover h3::after {
+      width: 100%;
+    }
+
+    .geinca-service-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .geinca-service-item {
+      padding: 10px 0;
+      position: relative;
+      padding-left: 30px;
+      color: #d1d1e9;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .geinca-service-item:hover {
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .geinca-service-item::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #6a11cb;
+      position: absolute;
+      left: 0;
+      top: 10px;
+      font-size: 0.8rem;
+      transition: color 0.3s ease;
+    }
+    
+    .geinca-service-item:hover::before {
+      color: #2575fc;
+    }
+
+    .geinca-fade-in {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+      transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    /* Animation for phone mockup */
+    .geinca-phone-animate {
+      animation: phoneFloat 6s ease-in-out infinite;
+    }
+    
+    @keyframes phoneFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(2deg);
+      }
+    }
+    
+    /* Animation for section entrance */
+    @keyframes sectionEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .geinca-section-entrance {
+      animation: sectionEntrance 1s ease-out forwards;
+    }
+
+    @media (max-width: 1200px) {
+      .geinca-services-content {
+        flex-direction: column;
+      }
+      
+      .geinca-phone-mockup {
+        margin: 30px 0;
+        order: -1;
+      }
+      
+      .geinca-services-column {
+        max-width: 100%;
+        width: 100%;
+      }
+      
+      .geinca-service-card {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .geinca-services-header h2 {
+        font-size: 2.2rem;
+      }
+      
+      .geinca-services-header p {
+        font-size: 1rem;
+      }
+      
+      .geinca-phone-mockup {
+        width: 280px;
+        height: 560px;
+        border-radius: 35px;
+      }
+      
+      .geinca-service-card {
+        padding: 20px;
+      }
+      
+      .geinca-service-card h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .geinca-services-header h2 {
+        font-size: 1.8rem;
+      }
+      
+      .geinca-phone-mockup {
+        width: 250px;
+        height: 500px;
+        border-radius: 30px;
+        border-width: 8px;
+      }
+      
+      .geinca-phone-overlay {
+        font-size: 1.5rem;
+      }
+      
+      .geinca-service-item {
+        padding-left: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="geinca-services-container">
+    <div class="geinca-services-header geinca-section-entrance">
+      <h2>Our Services</h2>
+      <p>Comprehensive digital solutions tailored to your business needs</p>
+    </div>
+
+    <div class="geinca-services-content">
+      <div class="geinca-services-column">
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-code"></i> Software Development</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">Custom and scalable solutions</li>
+            <li class="geinca-service-item">Secure and high-performance systems</li>
+            <li class="geinca-service-item">Full-cycle development</li>
+            <li class="geinca-service-item">Seamless integration</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-mobile-alt"></i> Mobile App Development</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">Android & iOS expertise</li>
+            <li class="geinca-service-item">User-focused UI/UX</li>
+            <li class="geinca-service-item">Robust architecture</li>
+            <li class="geinca-service-item">App store deployment</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-globe"></i> Web Development</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">Responsive & fast websites</li>
+            <li class="geinca-service-item">Custom web apps</li>
+            <li class="geinca-service-item">Clean, secure code</li>
+            <li class="geinca-service-item">SEO friendly design</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-chart-line"></i> Performance Marketing</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">ROI-driven campaigns</li>
+            <li class="geinca-service-item">Data-based strategies</li>
+            <li class="geinca-service-item">Targeted ads</li>
+            <li class="geinca-service-item">Conversion optimization</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="geinca-phone-mockup geinca-phone-animate">
+        <div class="geinca-phone-screen">
+          <div class="geinca-phone-image"><video src="videos/vid2.mp4" autoplay="on"></video></div>
+          <!-- <div class="geinca-phone-overlay">Geinca Digital Solutions</div> -->
+        </div>
+      </div>
+      
+      <div class="geinca-services-column">
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-bullseye"></i> Digital Marketing</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">SEO, SEM, and content</li>
+            <li class="geinca-service-item">Lead generation focus</li>
+            <li class="geinca-service-item">Holistic approach</li>
+            <li class="geinca-service-item">Custom strategies</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-hashtag"></i> Social Media Marketing</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">Platform-specific content</li>
+            <li class="geinca-service-item">Follower engagement</li>
+            <li class="geinca-service-item">Influencer campaigns</li>
+            <li class="geinca-service-item">Brand storytelling</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-paint-brush"></i> Graphic Designing</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">Logos, brochures, banners</li>
+            <li class="geinca-service-item">Visual branding</li>
+            <li class="geinca-service-item">Ad creatives</li>
+            <li class="geinca-service-item">Clear messaging</li>
+          </ul>
+        </div>
+        
+        <div class="geinca-service-card">
+          <h3><i class="fas fa-search"></i> SEO Optimization</h3>
+          <ul class="geinca-service-list">
+            <li class="geinca-service-item">On-page & off-page</li>
+            <li class="geinca-service-item">Keyword strategy</li>
+            <li class="geinca-service-item">Technical improvements</li>
+            <li class="geinca-service-item">Ranking analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.geinca-service-card');
+      const phoneMockup = document.querySelector('.geinca-phone-mockup');
+      const header = document.querySelector('.geinca-services-header');
+      
+      // Initial animations
+      header.classList.add('geinca-section-entrance');
+      
+      // Intersection Observer for cards
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add delay based on index for staggered effect
+            entry.target.style.transitionDelay = `${index * 0.1}s`;
+            entry.target.classList.add('geinca-fade-in');
+            
+            // Start phone animation when first card is visible
+            if (index === 0) {
+              phoneMockup.classList.add('geinca-phone-animate');
+            }
+            
+            // Optional: Unobserve after animation to improve performance
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      // Observe each card
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+      
+      // Re-animate when scrolling back up
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const container = document.querySelector('.geinca-services-container');
+        const containerTop = container.offsetTop;
+        const containerHeight = container.offsetHeight;
+        
+        // If we're within the container
+        if (scrollPosition > containerTop - 300 && 
+            scrollPosition < containerTop + containerHeight - 300) {
+          cards.forEach((card, index) => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (cardTop < windowHeight * 0.75) {
+              card.style.transitionDelay = `${index * 0.1}s`;
+              card.classList.add('geinca-fade-in');
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

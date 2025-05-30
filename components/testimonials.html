@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geinca - Testimonials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        .geinca-testimonial-root {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .geinca-testimonial-body {
+            background: #0f172a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .geinca-testimonial-wrapper {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .geinca-testimonial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .geinca-testimonial-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .geinca-testimonial-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .geinca-testimonial-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .geinca-testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .geinca-testimonial-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid #1e293b;
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .geinca-testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        .geinca-testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .geinca-testimonial-card:hover::before {
+            opacity: 1;
+        }
+        
+        .geinca-testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+        
+        .geinca-testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .geinca-testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #6366f1;
+        }
+        
+        .geinca-testimonial-author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #f8fafc;
+        }
+        
+        .geinca-testimonial-author-info p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .geinca-testimonial-rating {
+            color: #f59e0b;
+            margin-top: 5px;
+        }
+        
+        /* Floating background elements */
+        .geinca-floating-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .geinca-floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 1.5rem;
+            animation: geinca-float 8s infinite linear;
+        }
+        
+        .geinca-floating-icon:nth-child(2n) {
+            animation-duration: 10s;
+            animation-direction: reverse;
+        }
+        
+        .geinca-floating-icon:nth-child(3n) {
+            animation-duration: 13s;
+        }
+        
+        .geinca-floating-device {
+            position: absolute;
+            opacity: 0.03;
+            animation: geinca-float 10s infinite linear;
+        }
+        
+        .geinca-floating-device:nth-child(4n) {
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+        
+        .geinca-floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.05;
+            animation: geinca-float 6s infinite linear;
+        }
+        
+        .geinca-floating-emoji:nth-child(5n) {
+            animation-duration: 9s;
+            animation-direction: reverse;
+        }
+        
+        @keyframes geinca-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .geinca-testimonial-title {
+                font-size: 2rem;
+            }
+            
+            .geinca-testimonial-subtitle {
+                font-size: 1rem;
+            }
+            
+            .geinca-testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body >
+    <div class="geinca-testimonial-body">
+    <section class="geinca-testimonial-wrapper">
+        <div class="geinca-floating-bg" id="geincaFloatingBg"></div>
+        
+        <div class="geinca-testimonial-container">
+            <div class="geinca-testimonial-header">
+                <h2 class="geinca-testimonial-title">What Our Clients Say</h2>
+                <p class="geinca-testimonial-subtitle">Trusted by businesses worldwide. Here's what some of our amazing clients have to say about our services.</p>
+            </div>
+            
+            <div class="geinca-testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="geinca-testimonial-card">
+                    <p class="geinca-testimonial-quote">"Geinca transformed our online presence completely. Their web development team delivered beyond our expectations with a site that's both beautiful and highly functional."</p>
+                    <div class="geinca-testimonial-author">
+                        <!-- <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="geinca-testimonial-avatar"> -->
+                        <div class="geinca-testimonial-author-info">
+                            <h4>Sagarika</h4>
+                            <!-- <p>CEO, TechSolutions</p> -->
+                            <div class="geinca-testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="geinca-testimonial-card">
+                    <p class="geinca-testimonial-quote">"The mobile app Geinca developed for us has increased our customer engagement by 300%. Their attention to detail and user experience focus is unmatched."</p>
+                    <div class="geinca-testimonial-author">
+                        <!-- <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="geinca-testimonial-avatar"> -->
+                        <div class="geinca-testimonial-author-info">
+                            <h4>Mahesh</h4>
+                            <!-- <p>Founder, AppVantage</p> -->
+                            <div class="geinca-testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="geinca-testimonial-card">
+                    <p class="geinca-testimonial-quote">"Their marketing strategy helped us triple our leads in just 3 months. The Geinca team understands growth like no one else in the industry."</p>
+                    <div class="geinca-testimonial-author">
+                        <!-- <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez" class="geinca-testimonial-avatar"> -->
+                        <div class="geinca-testimonial-author-info">
+                            <h4>Priyanka</h4>
+                            <!-- <p>CMO, GrowthHack</p> -->
+                            <div class="geinca-testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingBg = document.getElementById('geincaFloatingBg');
+            
+            // Social media icons
+            const socialIcons = [
+                'fab fa-facebook', 'fab fa-twitter', 'fab fa-instagram',
+                'fab fa-linkedin', 'fab fa-youtube', 'fab fa-tiktok',
+                'fab fa-pinterest', 'fab fa-reddit', 'fab fa-whatsapp',
+                'fab fa-snapchat', 'fab fa-discord', 'fab fa-twitch'
+            ];
+            
+            // Device icons
+            const deviceIcons = [
+                '💻', '📱', '🖥️', '⌨️', '🖱️', '📷',
+                '🎮', '📸', '🖨️', '🖲️', '💾', '📠'
+            ];
+            
+            // Emojis
+            const emojis = [
+                '🚀', '🌟', '🔥', '💡', '🎯', '🌈',
+                '✨', '🎨', '📊', '📈', '💎', '🏆'
+            ];
+            
+            // Create floating social media icons
+            for (let i = 0; i < 30; i++) {
+                const icon = document.createElement('i');
+                icon.className = `geinca-floating-icon ${socialIcons[Math.floor(Math.random() * socialIcons.length)]}`;
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100}%`;
+                icon.style.fontSize = `${Math.random() * 2 + 1}rem`;
+                icon.style.animationDelay = `${Math.random() * 5}s`;
+                floatingBg.appendChild(icon);
+            }
+            
+            // Create floating device icons
+            for (let i = 0; i < 20; i++) {
+                const device = document.createElement('div');
+                device.className = 'geinca-floating-device';
+                device.textContent = deviceIcons[Math.floor(Math.random() * deviceIcons.length)];
+                device.style.left = `${Math.random() * 100}%`;
+                device.style.top = `${Math.random() * 100}%`;
+                device.style.fontSize = `${Math.random() * 3 + 1}rem`;
+                device.style.animationDelay = `${Math.random() * 10}s`;
+                floatingBg.appendChild(device);
+            }
+            
+            // Create floating emojis
+            for (let i = 0; i < 25; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'geinca-floating-emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = `${Math.random() * 100}%`;
+                emoji.style.top = `${Math.random() * 100}%`;
+                emoji.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
+                emoji.style.animationDelay = `${Math.random() * 7}s`;
+                floatingBg.appendChild(emoji);
+            }
+        });
+    </script>
+</body>
+</html>
