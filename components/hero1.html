@@ -625,16 +625,16 @@
      /* Responsive Styles */
 @media (max-width: 1200px) {
   .nexus-hero-content {
-    padding: 0 60px;
+    /* padding: 0 60px; */
   }
   
   .nexus-hero-left h1 {
     font-size: 54px;
   }
   
-  .nexus-hero-image {
+  /* .nexus-hero-image {
     width: 400px;
-  }
+  } */
   
   .nexus-floating-center-image {
     width: 180px;
@@ -679,7 +679,7 @@
   .nexus-hero-content {
     flex-direction: column;
     text-align: center;
-    padding: 120px 40px 60px;
+    /* padding: 120px 40px 60px; */
     justify-content: center;
   }
   
@@ -750,9 +750,9 @@
     font-size: 18px;
   }
   
-  .nexus-hero-content {
+  /* .nexus-hero-content {
     padding: 100px 25px 50px;
-  }
+  } */
   
   .nexus-hero-left h1 {
     font-size: 42px;
@@ -955,13 +955,14 @@
     margin-top: 20px;
   }
 
-  .nexus-hero-image {
+  /* .nexus-hero-image {
     width: 100%;
     max-width: 400px;
-  }
+  } */
 
   .nexus-floating-center-image {
-    display: none;
+    display:inline;
+    margin-top: -250px;
   }
 
   .nexus-floating-project {
@@ -1000,10 +1001,10 @@
     padding: 14px 28px;
     font-size: 15px;
   }
-
+/* 
   .nexus-hero-image {
     max-width: 320px;
-  }
+  } */
 
   .nexus-floating-project {
     padding: 15px;
@@ -1013,11 +1014,11 @@
 
 @media (max-width: 480px) {
   .nexus-hero {
-    padding-top: 60px;
+    /* padding-top: 60px; */
   }
 
   .nexus-hero-content {
-    padding: 0 20px;
+    /* padding: 0 20px; */
   }
 
   .nexus-hero-left h1 {
@@ -1029,9 +1030,9 @@
     margin-bottom: 15px;
   }
 
-  .nexus-hero-image {
+  /* .nexus-hero-image {
     max-width: 280px;
-  }
+  } */
 
   .nexus-floating-project {
     width: 90%;
@@ -1054,9 +1055,9 @@
     font-size: 15px;
   }
 
-  .nexus-hero-image {
+  /* .nexus-hero-image {
     max-width: 240px;
-  }
+  } */
 }
 
 @media (max-width: 768px) {
@@ -1064,6 +1065,40 @@
         padding: 1rem;
     }
 }
+
+
+
+
+
+
+
+
+.nexus-hero-image {
+  width: 130%;
+  max-width: 1400px;
+  height: 1200px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: -60px; /* Shifts the image slightly upward */
+}
+
+@media screen and (max-width: 768px) {
+  .nexus-hero-image {
+    top: -60px; /* Less upward shift on small screens */
+    /* padding: 0 10px; */
+     width: 105%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nexus-hero-image {
+    width: 105%;
+    top: -60px;
+    /* Even less shift for very small screens */
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1166,7 +1201,7 @@
       </div>
       <img class="nexus-floating-center-image" src="https://i.ibb.co/MqH3Ssj/haveanimage.webp" alt="Floating Image" />
       <div class="nexus-hero-right">
-        <img class="nexus-hero-image" src="images/p.png" alt="Digital Solution"  style="width: 800px; height: 1200px;"/>
+        <img class="nexus-hero-image" src="images/p.png" alt="Digital Solution"  />
         <div class="nexus-floating-project">
           <h4>Have a project?</h4>
           <p>Let's discuss </p>
