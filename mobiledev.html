@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobile App Development | TechMobile Solutions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .divmob {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    .mobile-bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .floating-icon {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.1);
+      animation: floatAround 8s ease-in-out infinite;
+    }
+
+    @keyframes floatAround {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      25% { transform: translateY(-30px) rotate(90deg); opacity: 0.8; }
+      50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+      75% { transform: translateY(-25px) rotate(270deg); opacity: 0.6; }
+    }
+
+    /* Talking Phone Character */
+    .phone-companion {
+      position: fixed;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    .smart-phone {
+      width: 100px;
+      height: 180px;
+      position: relative;
+      animation: phoneFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes phoneFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
+    }
+
+    .phone-device {
+      width: 100px;
+      height: 180px;
+      background: linear-gradient(145deg, #1a1a1a, #333333);
+      border-radius: 25px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      border: 3px solid #444;
+    }
+
+    .phone-screen {
+      width: 80px;
+      height: 140px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border-radius: 15px;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      animation: screenGlow 3s ease infinite;
+    }
+
+    @keyframes screenGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(79, 172, 254, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(79, 172, 254, 0.8); }
+    }
+
+    .phone-face {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    .phone-eyes {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .phone-eye {
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      animation: phoneWink 5s infinite;
+    }
+
+    @keyframes phoneWink {
+      0%, 95% { opacity: 1; }
+      96%, 100% { opacity: 0; }
+    }
+
+    .phone-mouth {
+      width: 20px;
+      height: 10px;
+      background: white;
+      border-radius: 0 0 20px 20px;
+      margin: 0 auto;
+      transition: all 0.2s ease;
+    }
+
+    .phone-mouth.speaking {
+      animation: phoneTalk 0.4s ease infinite alternate;
+    }
+
+    @keyframes phoneTalk {
+      0% { height: 10px; border-radius: 0 0 20px 20px; }
+      100% { height: 5px; border-radius: 10px; }
+    }
+
+    .phone-home-btn {
+      width: 30px;
+      height: 5px;
+      background: #666;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .phone-speaker {
+      width: 20px;
+      height: 3px;
+      background: #666;
+      border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .phone-notification {
+      position: absolute;
+      top: -50px;
+      right: 120px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 18px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      min-width: 180px;
+      opacity: 0;
+      transform: scale(0.8) translateX(20px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 13px;
+      color: #333;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .phone-notification::after {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 20px;
+      border: 8px solid transparent;
+      border-left-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .phone-notification.active {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+
+    /* Main App Development Section */
+    .app-development-hub {
+      padding: 80px 0 60px;
+      min-height: 100vh;
+      position: relative;
+      padding-right: 160px;
+    }
+
+    .app-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
+
+    .app-hero-header {
+      text-align: center;
+      margin-bottom: 70px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .app-hero-header.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .app-hero-header h1 {
+      font-size: 4rem;
+      background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 25px;
+      font-weight: 900;
+      text-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      line-height: 1.1;
+    }
+
+    .app-hero-header .app-subtitle {
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .app-services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-bottom: 70px;
+    }
+
+    .app-service-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 45px 35px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(50px) rotateX(10deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .app-service-card:hover::before {
+      left: 100%;
+    }
+
+    .app-service-card.slide-in {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+
+    .app-service-card:hover {
+      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+
+    .app-service-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.4s ease;
+      animation: iconBounce 3s ease infinite;
+      position: relative;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(5deg); }
+      75% { transform: scale(1.05) rotate(-5deg); }
+    }
+
+    .app-service-card:hover .app-service-icon {
+      animation-play-state: paused;
+      transform: scale(1.3) rotate(360deg);
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .app-service-icon i {
+      font-size: 40px;
+    }
+
+    .app-service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .app-service-card p {
+      color: #7f8c8d;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .app-platforms-showcase {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 50px;
+      margin-bottom: 70px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .app-platforms-showcase.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .app-platforms-showcase h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2c3e50;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .platform-badge {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .platform-badge::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.4s ease;
+    }
+
+    .platform-badge:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .platform-badge:hover {
+      transform: translateY(-8px) scale(1.1);
+      box-shadow: 0 15px 35px rgba(102,126,234,0.4);
+    }
+
+    .app-workflow-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 50px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .app-workflow-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .app-workflow-section h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      color: #2c3e50;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .workflow-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .workflow-stage {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease;
+      position: relative;
+    }
+
+    .workflow-stage.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stage-counter {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 0 auto 25px;
+      box-shadow: 0 10px 25px rgba(102,126,234,0.3);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .stage-counter::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .workflow-stage:hover .stage-counter::before {
+      opacity: 1;
+    }
+
+    .workflow-stage:hover .stage-counter {
+      transform: scale(1.2) rotate(360deg);
+    }
+
+    .workflow-stage h4 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .workflow-stage p {
+      color: #7f8c8d;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* Progress tracking */
+    .scroll-tracker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(255,255,255,0.2);
+      z-index: 1001;
+    }
+
+    .scroll-indicator {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+      .phone-companion {
+        right: 20px;
+        transform: translateY(-50%) scale(0.8);
+        position: fixed;
+      }
+
+      .app-development-hub {
+        padding: 60px 0 40px;
+        padding-right: 0;
+      }
+
+      .app-hero-header h1 {
+        font-size: 2.8rem;
+      }
+
+      .app-hero-header .app-subtitle {
+        font-size: 1.1rem;
+        padding: 0 15px;
+      }
+
+      .app-services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .phone-notification {
+        right: 90px;
+        min-width: 140px;
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+
+      .app-platforms-showcase {
+        padding: 30px 20px;
+      }
+
+      .app-workflow-section {
+        padding: 30px 20px;
+      }
+
+      .workflow-timeline {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .phone-companion {
+        right: 15px;
+        transform: translateY(-50%) scale(0.7);
+      }
+
+      .app-hero-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .app-service-card {
+        padding: 30px 20px;
+      }
+
+      .platform-badges {
+        gap: 10px;
+      }
+
+      .platform-badge {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-phone {
+      width: 60px;
+      height: 100px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 15px;
+      position: relative;
+      animation: loadingPulse 1.5s ease infinite;
+    }
+
+    @keyframes loadingPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .loading-screen {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 15px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 8px;
+      animation: screenFlicker 1s ease infinite alternate;
+    }
+
+    @keyframes screenFlicker {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="divmob">
+  <!-- Loading Screen -->
+  <div class="loading-overlay" id="loadingScreen">
+    <div class="loading-phone">
+      <div class="loading-screen"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Tracker -->
+  <div class="scroll-tracker">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="mobile-bg-elements" id="backgroundElements"></div>
+
+  <!-- Talking Phone Character -->
+  <div class="phone-companion" id="phoneCompanion">
+    <div class="smart-phone">
+      <div class="phone-device">
+        <div class="phone-speaker"></div>
+        <div class="phone-screen">
+          <div class="phone-face">
+            <div class="phone-eyes">
+              <div class="phone-eye"></div>
+              <div class="phone-eye"></div>
+            </div>
+            <div class="phone-mouth" id="phoneMouth"></div>
+          </div>
+        </div>
+        <div class="phone-home-btn"></div>
+      </div>
+    </div>
+    <div class="phone-notification" id="phoneNotification">
+      Welcome to mobile app development!
+    </div>
+  </div>
+
+  <!-- Mobile App Development Section -->
+  <section class="app-development-hub">
+    <div class="app-container">
+      <div class="app-hero-header" id="heroHeader">
+        <h1>Mobile App Development</h1>
+        <p class="app-subtitle">Creating innovative mobile experiences that users love and businesses trust</p>
+      </div>
+      
+      <div class="app-services-grid" id="servicesGrid">
+        <div class="app-service-card" data-phone-msg="Native iOS apps deliver the best performance and user experience on Apple devices!">
+          <div class="app-service-icon">
+            <i class="fab fa-apple"></i>
+          </div>
+          <h3>iOS Development</h3>
+          <p>Native iOS applications built with Swift and Objective-C, optimized for iPhone and iPad with seamless App Store integration.</p>
+        </div>
+        
+        <div class="app-service-card" data-phone-msg="Android development reaches billions of users worldwide with Google Play Store distribution!">
+          <div class="app-service-icon">
+            <i class="fab fa-android"></i>
+          </div>
+          <h3>Android Development</h3>
+          <p>Powerful Android applications using Kotlin and Java, designed for diverse devices with Google Play Store optimization.</p>
+        </div>
+        
+        <div class="app-service-card" data-phone-msg="Cross-platform development saves time and costs while maintaining native performance!">
+          <div class="app-service-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Cross-Platform Apps</h3>
+          <p>Efficient cross-platform solutions using React Native and Flutter, delivering native performance across multiple platforms.</p>
+        </div>
+        
+        <div class="app-service-card" data-phone-msg="Progressive Web Apps combine the best of web and mobile technologies!">
+          <div class="app-service-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3>Progressive Web Apps</h3>
+          <p>Modern PWAs that work offline, load instantly, and provide app-like experiences directly through web browsers.</p>
+        </div>
+        
+        <div class="app-service-card" data-phone-msg="UI/UX design is crucial for creating engaging and intuitive mobile experiences!">
+          <div class="app-service-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>User-centered design with intuitive interfaces, smooth animations, and accessibility-focused mobile experiences.</p>
+        </div>
+        
+        <div class="app-service-card" data-phone-msg="App Store optimization ensures your app gets discovered by the right users!">
+          <div class="app-service-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>App Store Optimization</h3>
+          <p>Strategic ASO services to improve app visibility, increase downloads, and boost user engagement across app stores.</p>
+        </div>
+      </div>
+      
+      <div class="app-platforms-showcase" id="platformsShowcase" data-phone-msg="We develop for all major platforms and use cutting-edge technologies!">
+        <h2>Development Platforms & Technologies</h2>
+        <div class="platform-badges">
+          <span class="platform-badge">Swift</span>
+          <span class="platform-badge">Kotlin</span>
+          <span class="platform-badge">React Native</span>
+          <span class="platform-badge">Flutter</span>
+          <span class="platform-badge">Xamarin</span>
+          <span class="platform-badge">Ionic</span>
+          <span class="platform-badge">Firebase</span>
+          <span class="platform-badge">MongoDB</span>
+          <span class="platform-badge">AWS Mobile</span>
+          <span class="platform-badge">Azure Mobile</span>
+          <span class="platform-badge">GraphQL</span>
+          <span class="platform-badge">WebRTC</span>
+        </div>
+      </div>
+      
+      <div class="app-workflow-section" id="workflowSection" data-phone-msg="Our proven development process ensures your app's success from concept to launch!">
+        <h2>Our Mobile Development Process</h2>
+        <div class="workflow-timeline">
+          <div class="workflow-stage" data-phone-msg="Strategy phase: We analyze your requirements and create a comprehensive mobile app strategy!">
+            <div class="stage-counter">1</div>
+            <h4>Strategy & Planning</h4>
+            <p>Comprehensive market research, user analysis, and technical architecture planning to ensure your app's success in the competitive mobile landscape.</p>
+          </div>
+          <div class="workflow-stage" data-phone-msg="Design phase: We create stunning and intuitive designs that users will love!">
+            <div class="stage-counter">2</div>
+            <h4>Design & Prototyping</h4>
+            <p>User-centered design with interactive prototypes, wireframes, and pixel-perfect UI designs optimized for mobile interactions.</p>
+          </div>
+          <div class="workflow-stage" data-phone-msg="Development phase: Our expert team codes your app with the latest technologies and best practices!">
+            <div class="stage-counter">3</div>
+            <h4>Development & Testing</h4>
+            <p>Agile development methodology with continuous integration, automated testing, and quality assurance throughout the development cycle.</p>
+          </div>
+          <div class="workflow-stage" data-phone-msg="Launch phase: We handle app store submission, optimization, and ongoing maintenance!">
+            <div class="stage-counter">4</div>
+            <h4>Launch & Maintenance</h4>
+            <p>App store submission, performance monitoring, user feedback integration, and continuous updates to keep your app competitive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+   <div id="social"></div>
+      <div id="chatbot"></div>
+<div id="footer"></div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  
+  // Hide loading screen after 2 seconds
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }, 2000);
+  
+  // Create background elements
+  createBackgroundElements();
+  
+  // Initialize phone companion
+  initPhoneCompanion();
+  
+  // Set up scroll progress tracker
+  window.addEventListener('scroll', updateScrollProgress);
+  
+  // Set up intersection observers
+  setupObservers();
+  
+  // Set up hover effects for service cards
+  setupServiceCardHovers();
+  
+  // Initial phone greeting
+  setTimeout(() => {
+    phoneSpeak("Welcome to our mobile app development services! Hover over items to learn more.");
+  }, 2500);
+});
+
+// Create floating background icons
+function createBackgroundElements() {
+  const bgElements = document.getElementById('backgroundElements');
+  const icons = ['📱', '💻', '⚡', '🚀', '💡', '🎨', '🔧', '📊'];
+  
+  for (let i = 0; i < 30; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'floating-icon';
+    icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+    icon.style.left = Math.random() * 100 + '%';
+    icon.style.top = Math.random() * 100 + '%';
+    icon.style.animationDelay = Math.random() * 8 + 's';
+    icon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    bgElements.appendChild(icon);
+  }
+}
+
+// Phone speech functionality
+const phoneMouth = document.getElementById('phoneMouth');
+const phoneNotification = document.getElementById('phoneNotification');
+let currentMessage = null;
+
+function phoneSpeak(message, duration = 3500) {
+  if (currentMessage) clearTimeout(currentMessage);
+  
+  phoneNotification.textContent = message;
+  phoneNotification.classList.add('active');
+  phoneMouth.classList.add('speaking');
+  
+  currentMessage = setTimeout(() => {
+    phoneNotification.classList.remove('active');
+    phoneMouth.classList.remove('speaking');
+  }, duration);
+}
+
+// Initialize phone companion interactions
+function initPhoneCompanion() {
+  const phoneCompanion = document.getElementById('phoneCompanion');
+  
+  // Make phone draggable
+  let isDragging = false;
+  let offsetX, offsetY;
+  
+  phoneCompanion.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - phoneCompanion.getBoundingClientRect().left;
+    offsetY = e.clientY - phoneCompanion.getBoundingClientRect().top;
+    phoneCompanion.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Constrain to viewport
+    const maxX = window.innerWidth - phoneCompanion.offsetWidth;
+    const maxY = window.innerHeight - phoneCompanion.offsetHeight;
+    
+    phoneCompanion.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+    phoneCompanion.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    phoneCompanion.style.right = 'auto';
+    phoneCompanion.style.transform = 'translateY(0)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    phoneCompanion.style.cursor = 'grab';
+  });
+  
+  // Click to speak random tip
+  phoneCompanion.addEventListener('click', (e) => {
+    if (isDragging) return;
+    
+    const tips = [
+      "Did you know? 90% of mobile time is spent in apps!",
+      "Mobile apps account for over 60% of digital media time!",
+      "Users check their phones an average of 58 times per day!",
+      "App store optimization can increase downloads by 30% or more!",
+      "Well-designed apps can increase user retention by up to 80%!",
+      "Cross-platform development can save up to 40% in development costs!"
+    ];
+    
+    phoneSpeak(tips[Math.floor(Math.random() * tips.length)]);
+  });
+}
+
+// Scroll progress tracking
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+}
+
+// Set up intersection observers for scroll animations
+function setupObservers() {
+  const observerConfig = {
+    threshold: 0.15,
+    rootMargin: '-30px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in', 'slide-in', 'reveal', 'visible');
+        
+        // Phone speaks when elements come into view
+        const phoneMessage = entry.target.getAttribute('data-phone-msg');
+        if (phoneMessage) {
+          setTimeout(() => {
+            phoneSpeak(phoneMessage, 4500);
+          }, 600);
+        }
+        
+        // Animate workflow stages with stagger
+        if (entry.target.classList.contains('app-workflow-section')) {
+          const stages = entry.target.querySelectorAll('.workflow-stage');
+          stages.forEach((stage, index) => {
+            setTimeout(() => {
+              stage.classList.add('animate');
+            }, index * 250);
+          });
+        }
+        
+        // Animate service cards with stagger
+        if (entry.target.classList.contains('app-services-grid')) {
+          const cards = entry.target.querySelectorAll('.app-service-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('slide-in');
+            }, index * 200);
+          });
+        }
+      }
+    });
+  }, observerConfig);
+
+  // Observe all sections that need animation
+  document.querySelectorAll('.app-hero-header, .app-service-card, .app-platforms-showcase, .app-workflow-section')
+    .forEach(el => scrollObserver.observe(el));
+}
+
+// Set up hover effects for service cards
+function setupServiceCardHovers() {
+  const serviceCards = document.querySelectorAll('.app-service-card');
+  
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const message = card.getAttribute('data-phone-msg');
+      if (message) {
+        phoneSpeak(message);
+      }
+    });
+    
+    // Add slight tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angleX = (y - centerY) / 20;
+      const angleY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.05)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+  
+  // Add hover effects to platform badges
+  const platformBadges = document.querySelectorAll('.platform-badge');
+  
+  platformBadges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      const tech = badge.textContent;
+      const messages = {
+        'Swift': 'Swift is  powerful programming language for iOS development!',
+        'Kotlin': 'Kotlin is the modern language for Android development, fully interoperable with Java!',
+        'React Native': 'React Native lets you build cross-platform apps with React and JavaScript!',
+        'Flutter': 'Flutter uses Dart to create beautiful native apps from a single codebase!',
+        'Xamarin': 'Xamarin uses C# to build cross-platform apps with native performance!',
+        'Ionic': 'Ionic builds hybrid mobile apps with web technologies like HTML, CSS, and JavaScript!',
+        'Firebase': 'Firebase provides backend services like authentication, database, and analytics!',
+        'MongoDB': 'MongoDB is a popular NoSQL database for mobile app backends!',
+        'AWS Mobile': 'AWS Mobile provides cloud services and tools for mobile developers!',
+        'Azure Mobile': 'Azure Mobile offers cloud backend services for mobile applications!',
+        'GraphQL': 'GraphQL is a modern API query language for efficient data fetching!',
+        'WebRTC': 'WebRTC enables real-time communication features in mobile apps!'
+      };
+      
+      if (messages[tech]) {
+        phoneSpeak(messages[tech]);
+      }
+    });
+  });
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  // Reset phone companion position if it goes off screen
+  const phoneCompanion = document.getElementById('phoneCompanion');
+  const rect = phoneCompanion.getBoundingClientRect();
+  
+  if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+    phoneCompanion.style.left = 'auto';
+    phoneCompanion.style.top = '50%';
+    phoneCompanion.style.right = '40px';
+    phoneCompanion.style.transform = 'translateY(-50%)';
+  }
+});
+  </script>
+   <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+</body>
+</html>

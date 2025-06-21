@@ -7,6 +7,108 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error loading the header:", error));
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // First, load the HTML content from projects2.html
+    fetch("components/projects2.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("projects2").innerHTML = data;
+
+            // Now that the HTML is loaded, proceed to populate projects
+            const projects = [
+                { name: "Vrakshaya", url: "https://vrakshaya.in" },
+                { name: "Shree Balaji Nursing Home", url: "https://shreebalajinursinghome.com" },
+                { name: "Shaikh Associates", url: "https://shaikh-associates.com" },
+                { name: "Relife Ambulance", url: "https://relifeambulance.in" },
+                { name: "PEMS", url: "https://pemss.in" },
+                { name: "New Panacea Hospital", url: "https://newpanaceahospital.com" },
+                { name: "NBC Celebration", url: "https://nbcelebration.in" },
+                { name: "Kanchanjunga View Homestays", url: "https://kanchanjungaviewhomestays.in" },
+                { name: "Hardik Health Point", url: "https://hardikhealthpoint.in" },
+                { name: "GEINCA", url: "https://geinca.com" },
+                { name: "Dr. Suresh Bajoria", url: "https://drsureshbajoria.in" },
+                { name: "Dr. Koushik Dasgupta", url: "https://drkoushikdasgupta.in" },
+                { name: "Dr. Biaus Samanta", url: "https://drbiaussamanta.in" },
+                { name: "Dr. Avijit Mukherjee", url: "https://dravijitmukherjee.in" },
+                { name: "Dr. Aditya Verma", url: "https://dradityaverma.in" },
+                { name: "Paaprika", url: "https://paaprika.com" },
+                { name: "Celestial Go Web", url: "https://celestialgoweb.com" },
+                { name: "NXSG", url: "https://nxsg.in" },
+                { name: "Dr. Puspak Samal", url: "https://drpuspaksamal.com" },
+                { name: "A4 Trading", url: "https://a4trading.net" },
+                { name: "Twin Twozz", url: "https://twintwozz.com" },
+                { name: "Modern SA", url: "https://modern-sa.com" },
+                { name: "Alahmadi KSA", url: "https://alahmadi-ksa.com" },
+                { name: "Protech KSA", url: "https://protechksa.com" },
+                { name: "Asdaf", url: "https://asdaf.net" },
+                { name: "Ecomish", url: "https://ecomish.com" },
+                { name: "Udaan Society", url: "https://udaansociety.org" },
+                { name: "UK People Choice", url: "https://ukpeoplechoice.co.uk" },
+                { name: "Adventure Rocks", url: "https://adventurerocks.in" },
+                { name: "Mudita Jewels", url: "https://muditajewels.com" },
+                { name: "Women's Fashion Mart", url: "https://womensfashionmart.com" },
+                { name: "Money Can Roll", url: "https://moneycanroll.com" },
+                { name: "Projexel KSA", url: "https://projexelksa.com" },
+                { name: "JRAFA Care", url: "https://jrafacare.com" },
+                { name: "Dr sutpan samanta", url: "https://drsutapansamanta.in/" },
+                { name: "Dyuti Elderly Care", url: "https://www.dyutielderlycare.in/" }
+            ];
+
+            const container = document.querySelector('.projects-container');
+            const closeBtn = document.querySelector('.close-btn');
+
+            if (container) {
+                projects.forEach(project => {
+                    const projectItem = document.createElement('div');
+                    projectItem.className = 'project-item';
+
+                    const icon = document.createElement('div');
+                    icon.className = 'project-icon';
+                    icon.textContent = project.name.charAt(0);
+
+                    const name = document.createElement('div');
+                    name.className = 'project-name';
+                    name.textContent = project.name;
+
+                    projectItem.appendChild(icon);
+                    projectItem.appendChild(name);
+
+                    projectItem.addEventListener('click', () => {
+                        window.open(project.url, '_blank');
+                    });
+
+                    container.appendChild(projectItem);
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    document.querySelector('.window').style.display = 'none';
+                });
+            }
+            // Get the search input and projects container
+const searchInput = document.querySelector('.search-bar');
+const projectsContainer = document.querySelector('.projects-container');
+const projectItems = document.querySelectorAll('.project-item');
+
+// Add event listener for search input
+searchInput.addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    
+    projectItems.forEach(item => {
+        const projectName = item.querySelector('.project-name').textContent.toLowerCase();
+        
+        if (projectName.includes(searchTerm)) {
+            item.style.display = 'flex'; // Show matching projects
+        } else {
+            item.style.display = 'none'; // Hide non-matching projects
+        }
+    });
+});
+        })
+        .catch(error => console.error("Error loading the project HTML:", error));
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Load navigation component
@@ -136,6 +238,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize menu functionality
     function initMenuFunctionality() {
         // Toggle sidebar menu
+        function initMenuFunctionality() {
+        // Toggle sidebar menu
         function toggleNexusMenu() {
             const sidebar = document.getElementById('nexusSidebarMenu');
             const overlay = document.getElementById('nexusMenuOverlay');
@@ -148,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const menuToggle = document.querySelector('.nexus-menu-toggle');
         if (menuToggle) {
             menuToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent event from bubbling up
+                e.stopPropagation();
                 toggleNexusMenu();
             });
         }
@@ -168,7 +272,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const overlay = document.getElementById('nexusMenuOverlay');
             
             if (sidebar && overlay) {
-                // If click is outside sidebar and overlay is active, close it
                 if (!sidebar.contains(event.target)) {
                     if (overlay.classList.contains('active')) {
                         toggleNexusMenu();
@@ -177,77 +280,67 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-
-
-        const heroSection = document.querySelector('.nexus-hero');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // First remove class to reset animation
-      entry.target.classList.remove('animate-in');
-      
-      // Force reflow to ensure reset takes effect
-      void entry.target.offsetWidth;
-      
-      // Then add class with delay
-      setTimeout(() => {
-        entry.target.classList.add('animate-in');
-      }, 1); // Small delay to ensure reset completes
-    } else {
-      entry.target.classList.remove('animate-in');
-    }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-});
-
-observer.observe(heroSection);
-
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.nexus-header');
             if (header) {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.toggle('scrolled', window.scrollY > 50);
             }
         });
 
-        // Animate elements when they come into view
-        const animateOnScroll = function() {
-            const elements = document.querySelectorAll('.nexus-hero-left, .nexus-hero-right, .nexus-floating-project, .nexus-floating-center-image, .nexus-about-content');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = element.style.transform.includes('translate(-50%') 
+        // Immediately animate hero section on load
+        const heroSection = document.querySelector('.nexus-hero');
+        if (heroSection) {
+            heroSection.classList.add('animate-in');
+        }
+
+        // Animate other elements immediately
+        const elementsToAnimate = document.querySelectorAll(
+            '.nexus-hero-left, .nexus-hero-right, .nexus-floating-project, .nexus-floating-center-image'
+        );
+        
+        elementsToAnimate.forEach(element => {
+            element.style.opacity = '1';
+            element.style.transform = element.style.transform.includes('translate(-50%') 
+                ? 'translate(-50%, -50%)' 
+                : 'translateY(0)';
+        });
+
+        // Set up Intersection Observer for elements that might come into view later
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = entry.target.style.transform.includes('translate(-50%') 
                         ? 'translate(-50%, -50%)' 
                         : 'translateY(0)';
                 }
             });
-        };
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
 
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-        
-        // Only open dropdown when clicking the arrow
+        // Observe all animatable elements
+        document.querySelectorAll(
+            '.nexus-hero-left, .nexus-hero-right, .nexus-floating-project, .nexus-floating-center-image, .nexus-about-content'
+        ).forEach(element => {
+            observer.observe(element);
+        });
+
+        // Dropdown arrow functionality
         document.querySelectorAll('.nexus-sidebar-menu details summary').forEach(summary => {
             summary.addEventListener('click', function(e) {
-                // Check if click was on the arrow (the ::after pseudo-element doesn't count)
                 const arrowClicked = e.offsetX > this.offsetWidth - 30;
                 if (!arrowClicked) {
                     e.preventDefault();
                 }
             });
         });
+    }
+
+    // Initialize all functionality
+    initMenuFunctionality();
     }
 });
 

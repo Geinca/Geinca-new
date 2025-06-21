@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Software Development | WebDev Co.</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --accent-color: #4f46e5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b7280;
+      --white: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .soft{
+      font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--primary-gradient);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Enhanced Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(1); 
+        opacity: 0.4; 
+      }
+      33% { 
+        transform: translateY(-30px) rotate(120deg) scale(1.2); 
+        opacity: 0.8; 
+      }
+      66% { 
+        transform: translateY(-15px) rotate(240deg) scale(0.8); 
+        opacity: 0.6; 
+      }
+    }
+
+    /* Enhanced Draggable Robot */
+    .robot-container {
+      position: fixed;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: grab;
+      user-select: none;
+    }
+
+    .robot-container:active {
+      cursor: grabbing;
+    }
+
+    .robot-container.dragging {
+      transition: none;
+      z-index: 1001;
+    }
+
+    .robot {
+      width: 100px;
+      height: 130px;
+      position: relative;
+      animation: robotBob 4s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    }
+
+    @keyframes robotBob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(0deg); }
+      75% { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    .robot-head {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+      border-radius: 16px;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .robot-eye {
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(45deg, #06b6d4, #0891b2);
+      border-radius: 50%;
+      position: absolute;
+      top: 22px;
+      animation: blink 5s infinite;
+      box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+    }
+
+    .robot-eye.left { left: 18px; }
+    .robot-eye.right { right: 18px; }
+
+    @keyframes blink {
+      0%, 94%, 100% { opacity: 1; transform: scaleY(1); }
+      95%, 99% { opacity: 0.3; transform: scaleY(0.1); }
+    }
+
+    .robot-mouth {
+      width: 24px;
+      height: 12px;
+      background: #374151;
+      border-radius: 0 0 12px 12px;
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.2s ease;
+    }
+
+    .robot-mouth.talking {
+      animation: talk 0.4s ease infinite alternate;
+    }
+
+    @keyframes talk {
+      0% { height: 12px; border-radius: 0 0 12px 12px; }
+      100% { height: 6px; border-radius: 12px; }
+    }
+
+    .robot-antenna {
+      width: 2px;
+      height: 16px;
+      background: linear-gradient(to top, #6b7280, #374151);
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .robot-antenna::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      border-radius: 50%;
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: signal 2s ease infinite;
+      box-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
+    }
+
+    @keyframes signal {
+      0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.4; transform: translateX(-50%) scale(1.3); }
+    }
+
+    .robot-body {
+      width: 50px;
+      height: 60px;
+      background: linear-gradient(145deg, #f1f5f9, #cbd5e1);
+      border-radius: 12px;
+      margin: 8px auto 0;
+      position: relative;
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .robot-panel {
+      width: 32px;
+      height: 24px;
+      background: linear-gradient(145deg, #1f2937, #111827);
+      border-radius: 6px;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .robot-button {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      animation: buttonBlink 3s ease infinite;
+    }
+
+    .robot-button:nth-child(1) { 
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      left: 6px; 
+      animation-delay: 0s;
+    }
+    .robot-button:nth-child(2) { 
+      background: linear-gradient(45deg, #10b981, #059669);
+      left: 14px; 
+      animation-delay: 1s;
+    }
+    .robot-button:nth-child(3) { 
+      background: linear-gradient(45deg, #3b82f6, #2563eb);
+      left: 22px; 
+      animation-delay: 2s;
+    }
+
+    @keyframes buttonBlink {
+      0%, 80%, 100% { opacity: 0.7; }
+      85%, 95% { opacity: 1; box-shadow: 0 0 6px currentColor; }
+    }
+
+    .speech-bubble {
+      position: absolute;
+      top: -70px;
+      left: 110px;
+      background: var(--white);
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-medium);
+      min-width: 200px;
+      max-width: 280px;
+      opacity: 0;
+      transform: scale(0.8) translateY(10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 13px;
+      color: var(--text-primary);
+      font-weight: 500;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 24px;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-right-color: var(--white);
+    }
+
+    .speech-bubble.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Main Content Styles */
+    .software-development-section {
+      padding: 80px 0 60px;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .section-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .section-header .tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: var(--glass-bg);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      box-shadow: var(--shadow-light);
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: var(--shadow-heavy);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    .feature-card .icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      background: var(--secondary-gradient);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card .icon::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+
+    .feature-card:hover .icon::before {
+      animation: shine 0.6s ease;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+    }
+
+    .feature-card .icon svg {
+      width: 32px;
+      height: 32px;
+      z-index: 1;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .tech-stack {
+      background: var(--glass-bg);
+      border-radius: 24px;
+      padding: 48px 40px;
+      margin-bottom: 80px;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-light);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tech-stack.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tech-stack h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--text-primary);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .tech-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .tech-icon {
+      background: var(--secondary-gradient);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 32px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .tech-icon:hover::before {
+      left: 100%;
+    }
+
+    .tech-icon:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .process-section {
+      background: var(--glass-bg);
+      border-radius: 24px;
+      padding: 48px 40px;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-light);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .process-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .process-section h2 {
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--text-primary);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .process-step {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 24px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .process-step:hover {
+      background: rgba(79, 70, 229, 0.05);
+    }
+
+    .process-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--secondary-gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 auto 24px;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: rotate 4s linear infinite;
+      opacity: 0;
+    }
+
+    .process-step:hover .step-number::before {
+      opacity: 1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .process-step h4 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .process-step p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* Scroll Progress */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      z-index: 1002;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      .speech-bubble {
+        left: 90px;
+        min-width: 180px;
+        max-width: 220px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .robot-container {
+        left: 20px;
+        transform: translateY(-50%) scale(0.9);
+      }
+
+      .software-development-section {
+        padding: 60px 0 40px;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 60px;
+      }
+
+      .feature-card {
+        padding: 32px 24px;
+      }
+
+      .tech-stack, .process-section {
+        padding: 32px 24px;
+        margin-bottom: 60px;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .speech-bubble {
+        left: 70px;
+        min-width: 160px;
+        max-width: 200px;
+        font-size: 11px;
+        padding: 12px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .robot-container {
+        left: 15px;
+        transform: translateY(-50%) scale(0.8);
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .section-header {
+        margin-bottom: 60px;
+      }
+
+      .feature-card {
+        padding: 28px 20px;
+      }
+
+      .tech-stack, .process-section {
+        padding: 28px 20px;
+        margin-bottom: 50px;
+      }
+
+      .speech-bubble {
+        left: 60px;
+        min-width: 140px;
+        max-width: 180px;
+        font-size: 10px;
+        padding: 10px 14px;
+        top: -60px;
+      }
+
+      .tech-icons {
+        gap: 12px;
+      }
+
+      .tech-icon {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Ultra-wide screens */
+    @media (min-width: 1920px) {
+      .container {
+        max-width: 1400px;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="nav"></div>
+  <div class="soft">
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </div>
+
+  <!-- Floating Particles Background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Enhanced Draggable Robot Character -->
+  <div class="robot-container" id="robotContainer">
+    <div class="robot">
+      <div class="robot-head">
+        <div class="robot-antenna"></div>
+        <div class="robot-eye left"></div>
+        <div class="robot-eye right"></div>
+        <div class="robot-mouth" id="robotMouth"></div>
+      </div>
+      <div class="robot-body">
+        <div class="robot-panel">
+          <div class="robot-button"></div>
+          <div class="robot-button"></div>
+          <div class="robot-button"></div>
+        </div>
+      </div>
+    </div>
+    <div class="speech-bubble" id="speechBubble">
+      Hi! I'm your development guide. Drag me around!
+    </div>
+  </div>
+
+  <!-- Software Development Section -->
+  <section class="software-development-section">
+    <div class="container">
+      <div class="section-header" id="sectionHeader">
+        <h1>Software Development Solutions</h1>
+        <p class="tagline">Transforming ideas into powerful, scalable digital solutions with cutting-edge technology and expert craftsmanship</p>
+      </div>
+      
+      <div class="content-grid" id="contentGrid">
+        <div class="feature-card" data-robot-text="We create bespoke software solutions tailored precisely to your unique business needs and workflows!">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,2H6C4.89,2 4,2.89 4,4V20C4,21.11 4.89,22 6,22H18C19.11,22 20,21.11 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </svg>
+          </div>
+          <h3>Custom Software Development</h3>
+          <p>Bespoke solutions engineered with precision, designed specifically for your business processes and optimized for maximum efficiency and scalability.</p>
+        </div>
+        
+        <div class="feature-card" data-robot-text="Our enterprise-grade systems are built to scale seamlessly as your organization grows and evolves!">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L15,1H5C3.89,1 3,1.89 3,3V21C3,22.11 3.89,23 5,23H19C20.11,23 21,22.11 21,21V9M19,21H5V3H13V9H19V21Z"/>
+            </svg>
+          </div>
+          <h3>Enterprise Systems</h3>
+          <p>Robust, scalable platforms designed to grow with your organization, featuring seamless integration capabilities and enterprise-grade security.</p>
+        </div>
+        
+        <div class="feature-card" data-robot-text="Quality is our cornerstone - every line of code undergoes rigorous testing to ensure excellence!">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2L13.09,8.26L22,9L13.09,9.74L12,16L10.91,9.74L2,9L10.91,8.26L12,2Z"/>
+            </svg>
+          </div>
+          <h3>Quality Assurance</h3>
+          <p>Comprehensive testing protocols, automated CI/CD pipelines, and rigorous quality gates ensuring optimal performance, security, and reliability.</p>
+        </div>
+      </div>
+      
+      <div class="tech-stack" id="techStack" data-robot-text="We leverage the most powerful and innovative technologies in the industry to build exceptional solutions!">
+        <h2>Our Technology Ecosystem</h2>
+        <div class="tech-icons">
+          <span class="tech-icon">Java</span>
+          <span class="tech-icon">Python</span>
+          <span class="tech-icon">.NET Core</span>
+          <span class="tech-icon">Node.js</span>
+          <span class="tech-icon">React</span>
+          <span class="tech-icon">Angular</span>
+          <span class="tech-icon">Vue.js</span>
+          <span class="tech-icon">TypeScript</span>
+          <span class="tech-icon">PostgreSQL</span>
+          <span class="tech-icon">MongoDB</span>
+          <span class="tech-icon">AWS</span>
+          <span class="tech-icon">Azure</span>
+          <span class="tech-icon">Docker</span>
+          <span class="tech-icon">Kubernetes</span>
+        </div>
+      </div>
+      
+      <div class="process-section" id="processSection" data-robot-text="Our proven methodology ensures project success from initial concept through to deployment and beyond!">
+        <h2>Our Development Methodology</h2>
+        <div class="process-steps">
+          <div class="process-step" data-robot-text="Discovery & Strategy: We dive deep into understanding your vision, requirements, and business objectives!">
+            <div class="step-number">1</div>
+            <h4>Discovery & Strategy</h4>
+            <p>Comprehensive analysis of your requirements, business objectives, and technical constraints to create a strategic roadmap for success.</p>
+          </div>
+          <div class="process-step" data-robot-text="Architecture & Design: We craft robust system architecture and intuitive user experiences!">
+            <div class="step-number">2</div>
+            <h4>Architecture & Design</h4>
+            <p>Creating scalable system architecture and intuitive user experience designs using modern principles and industry best practices.</p>
+          </div>
+          <div class="process-step" data-robot-text="Agile Development: Our expert team brings your vision to life with clean, maintainable code!">
+            <div class="step-number">3</div>
+            <h4>Agile Development</h4>
+            <p>Iterative development with continuous integration, automated testing, and regular client feedback incorporation throughout the process.</p>
+          </div>
+          <div class="process-step" data-robot-text="Launch & Evolution: We ensure smooth deployment with comprehensive support and continuous optimization!">
+            <div class="step-number">4</div>
+            <h4>Launch & Evolution</h4>
+            <p>Seamless deployment with minimal disruption, comprehensive training, ongoing maintenance, and continuous optimization support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  <div id="social"></div>
+      <div id="chatbot"></div>
+      <div id="footer"></div>
+ <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+  <script>
+    // Enhanced Particle System
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      const particleCount = window.innerWidth > 768 ? 60 : 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+        particles.appendChild(particle);
+      }
+    }
+
+    // Enhanced Draggable Robot System
+    class DraggableRobot {
+      constructor() {
+        this.robot = document.getElementById('robotContainer');
+        this.speechBubble = document.getElementById('speechBubble');
+        this.robotMouth = document.getElementById('robotMouth');
+        this.isDragging = false;
+        this.currentSpeech = null;
+        this.dragOffset = { x: 0, y: 0 };
+        
+        this.init();
+      }
+
+      init() {
+        this.robot.addEventListener('mousedown', this.startDrag.bind(this));
+        this.robot.addEventListener('touchstart', this.startDrag.bind(this), { passive: false });
+        document.addEventListener('mousemove', this.drag.bind(this));
+        document.addEventListener('touchmove', this.drag.bind(this), { passive: false });
+        document.addEventListener('mouseup', this.endDrag.bind(this));
+        document.addEventListener('touchend', this.endDrag.bind(this));
+        
+        // Initial greeting
+        setTimeout(() => {
+          this.speak("Hello! I'm your AI development assistant. You can drag me anywhere on the screen!", 5000);
+        }, 1500);
+      }
+
+      startDrag(e) {
+        this.isDragging = true;
+        this.robot.classList.add('dragging');
+        
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        const rect = this.robot.getBoundingClientRect();
+        
+        this.dragOffset.x = clientX - rect.left;
+        this.dragOffset.y = clientY - rect.top;
+        
+        e.preventDefault();
+      }
+
+      drag(e) {
+        if (!this.isDragging) return;
+        
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+        
+        const maxX = window.innerWidth - this.robot.offsetWidth;
+        const maxY = window.innerHeight - this.robot.offsetHeight;
+        
+        let newX = Math.max(0, Math.min(maxX, clientX - this.dragOffset.x));
+        let newY = Math.max(0, Math.min(maxY, clientY - this.dragOffset.y));
+        
+        this.robot.style.left = newX + 'px';
+        this.robot.style.top = newY + 'px';
+        this.robot.style.transform = 'none';
+        
+        e.preventDefault();
+      }
+
+      endDrag() {
+        if (!this.isDragging) return;
+        
+        this.isDragging = false;
+        this.robot.classList.remove('dragging');
+        
+        // Snap to edges if close
+        const rect = this.robot.getBoundingClientRect();
+        const snapDistance = 50;
+        
+        if (rect.left < snapDistance) {
+          this.robot.style.left = '20px';
+          this.speak("Snapped to the left edge!", 2000);
+        } else if (rect.right > window.innerWidth - snapDistance) {
+          this.robot.style.left = (window.innerWidth - this.robot.offsetWidth - 20) + 'px';
+          this.speak("Snapped to the right edge!", 2000);
+        }
+        
+        if (rect.top < snapDistance) {
+          this.robot.style.top = '20px';
+        } else if (rect.bottom > window.innerHeight - snapDistance) {
+          this.robot.style.top = (window.innerHeight - this.robot.offsetHeight - 20) + 'px';
+        }
+      }
+
+      speak(text, duration = 3000) {
+        if (this.currentSpeech) clearTimeout(this.currentSpeech);
+        
+        this.speechBubble.textContent = text;
+        this.speechBubble.classList.add('show');
+        this.robotMouth.classList.add('talking');
+        
+        this.currentSpeech = setTimeout(() => {
+          this.speechBubble.classList.remove('show');
+          this.robotMouth.classList.remove('talking');
+        }, duration);
+      }
+    }
+
+    // Enhanced Intersection Observer
+    class ScrollAnimations {
+      constructor() {
+        this.observerOptions = {
+          threshold: 0.1,
+          rootMargin: '-50px 0px'
+        };
+        
+        this.observer = new IntersectionObserver(this.handleIntersection.bind(this), this.observerOptions);
+        this.init();
+      }
+
+      init() {
+        const elementsToObserve = document.querySelectorAll('.section-header, .content-grid, .tech-stack, .process-section');
+        elementsToObserve.forEach(el => this.observer.observe(el));
+      }
+
+      handleIntersection(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // Robot speaks when elements come into view
+            const robotText = entry.target.getAttribute('data-robot-text');
+            if (robotText && window.draggableRobot) {
+              setTimeout(() => {
+                window.draggableRobot.speak(robotText, 4000);
+              }, 500);
+            }
+            
+            // Animate process steps with staggered delay
+            if (entry.target.classList.contains('process-section')) {
+              const steps = entry.target.querySelectorAll('.process-step');
+              steps.forEach((step, index) => {
+                setTimeout(() => {
+                  step.classList.add('visible');
+                }, index * 200);
+              });
+            }
+            
+            // Animate feature cards with staggered delay
+            if (entry.target.classList.contains('content-grid')) {
+              const cards = entry.target.querySelectorAll('.feature-card');
+              cards.forEach((card, index) => {
+                setTimeout(() => {
+                  card.classList.add('visible');
+                }, index * 300);
+              });
+            }
+          }
+        });
+      }
+    }
+
+    // Scroll Progress Indicator
+    function updateScrollProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
+      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    }
+
+    // Interactive Card Effects
+    function addInteractiveEffects() {
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          const text = card.getAttribute('data-robot-text');
+          if (text && window.draggableRobot) {
+            window.draggableRobot.speak(text, 3000);
+          }
+        });
+      });
+
+      // Tech stack interactions
+      const techStack = document.getElementById('techStack');
+      if (techStack) {
+        techStack.addEventListener('mouseenter', () => {
+          const text = techStack.getAttribute('data-robot-text');
+          if (text && window.draggableRobot) {
+            window.draggableRobot.speak(text, 3000);
+          }
+        });
+      }
+
+      // Process section interactions
+      const processSection = document.getElementById('processSection');
+      if (processSection) {
+        processSection.addEventListener('mouseenter', () => {
+          const text = processSection.getAttribute('data-robot-text');
+          if (text && window.draggableRobot) {
+            window.draggableRobot.speak(text, 3000);
+          }
+        });
+      }
+
+      // Tech icon clicks
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tech-icon') && window.draggableRobot) {
+          const techName = e.target.textContent;
+          window.draggableRobot.speak(`${techName} is one of our core technologies! We have extensive expertise in building robust solutions with it.`, 3500);
+        }
+        
+        if (e.target.classList.contains('step-number') && window.draggableRobot) {
+          const step = e.target.closest('.process-step');
+          const text = step.getAttribute('data-robot-text');
+          if (text) {
+            window.draggableRobot.speak(text, 3500);
+          }
+        }
+      });
+    }
+
+    // Responsive Particle Management
+    function handleResize() {
+      const particles = document.getElementById('particles');
+      const isMobile = window.innerWidth <= 768;
+      const currentParticleCount = particles.children.length;
+      const targetCount = isMobile ? 20 : 50;
+      
+      if (currentParticleCount !== targetCount) {
+        particles.innerHTML = '';
+        createParticles();
+      }
+    }
+
+    // Smooth Scroll Performance
+    let ticking = false;
+    function optimizedScrollHandler() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateScrollProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // Initialize Everything
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // Initialize robot with global reference
+      window.draggableRobot = new DraggableRobot();
+      
+      // Initialize scroll animations
+      new ScrollAnimations();
+      
+      // Add interactive effects
+      addInteractiveEffects();
+      
+      // Event listeners
+      window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+      window.addEventListener('resize', handleResize, { passive: true });
+      
+      // Performance optimization: Reduce animations on low-end devices
+      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) {
+        document.body.style.setProperty('--animation-duration', '0.2s');
+      }
+    });
+
+    // Prevent context menu on robot (optional UX enhancement)
+    document.getElementById('robotContainer').addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

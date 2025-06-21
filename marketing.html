@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobile App Development | TechMobile Solutions</title>
+  <style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.divmob {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 50%, #ff7b00 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated background elements */
+.marketing-bg-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.1);
+  animation: floatAround 8s ease-in-out infinite;
+}
+
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  25% { transform: translateY(-30px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+  75% { transform: translateY(-25px) rotate(270deg); opacity: 0.6; }
+}
+
+/* Talking Megaphone Character */
+.megaphone-companion {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  transition: all 0.4s ease;
+  cursor: grab;
+}
+
+.smart-megaphone {
+  width: 120px;
+  height: 150px;
+  position: relative;
+  animation: megaphoneFloat 4s ease-in-out infinite;
+}
+
+@keyframes megaphoneFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.megaphone-device {
+  width: 120px;
+  height: 150px;
+  background: linear-gradient(145deg, #1a1a1a, #333333);
+  border-radius: 60px 60px 25px 25px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  border: 3px solid #444;
+}
+
+.megaphone-screen {
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #ff7b00 0%, #ff4b2b 100%);
+  border-radius: 15px;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  animation: screenGlow 3s ease infinite;
+}
+
+@keyframes screenGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 123, 0, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(255, 123, 0, 0.8); }
+}
+
+.megaphone-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.megaphone-eyes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.megaphone-eye {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: megaphoneWink 5s infinite;
+}
+
+@keyframes megaphoneWink {
+  0%, 95% { opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+
+.megaphone-mouth {
+  width: 20px;
+  height: 10px;
+  background: white;
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto;
+  transition: all 0.2s ease;
+}
+
+.megaphone-mouth.speaking {
+  animation: megaphoneTalk 0.4s ease infinite alternate;
+}
+
+@keyframes megaphoneTalk {
+  0% { height: 10px; border-radius: 0 0 20px 20px; }
+  100% { height: 5px; border-radius: 10px; }
+}
+
+.megaphone-handle {
+  width: 30px;
+  height: 60px;
+  background: #666;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.megaphone-notification {
+  position: absolute;
+  top: -50px;
+  right: 120px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 18px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  min-width: 180px;
+  opacity: 0;
+  transform: scale(0.8) translateX(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 13px;
+  color: #333;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.megaphone-notification::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 20px;
+  border: 8px solid transparent;
+  border-left-color: rgba(255, 255, 255, 0.95);
+}
+
+.megaphone-notification.active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+/* Main Marketing Section */
+.marketing-development-hub {
+  padding: 80px 0 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-right: 160px;
+}
+
+.marketing-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.marketing-hero-header {
+  text-align: center;
+  margin-bottom: 70px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.marketing-hero-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.marketing-hero-header h1 {
+  font-size: 4rem;
+  background: linear-gradient(45deg, #ffffff, #f0f0f0, #ffe0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  font-weight: 900;
+  text-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  line-height: 1.1;
+}
+
+.marketing-hero-header .marketing-subtitle {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.marketing-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  margin-bottom: 70px;
+}
+
+.marketing-service-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 45px 35px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(50px) rotateX(10deg);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.marketing-service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.marketing-service-card:hover::before {
+  left: 100%;
+}
+
+.marketing-service-card.slide-in {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.marketing-service-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.marketing-service-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 30px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.4s ease;
+  animation: iconBounce 3s ease infinite;
+  position: relative;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.05) rotate(-5deg); }
+}
+
+.marketing-service-card:hover .marketing-service-icon {
+  animation-play-state: paused;
+  transform: scale(1.3) rotate(360deg);
+  background: linear-gradient(135deg, #ff7b00, #ff4b2b);
+}
+
+.marketing-service-icon i {
+  font-size: 40px;
+}
+
+.marketing-service-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.marketing-service-card p {
+  color: #7f8c8d;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.marketing-platforms-showcase {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  margin-bottom: 70px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.marketing-platforms-showcase.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.marketing-platforms-showcase h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.platform-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.platform-badge {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255,75,43,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.platform-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.platform-badge:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.platform-badge:hover {
+  transform: translateY(-8px) scale(1.1);
+  box-shadow: 0 15px 35px rgba(255,75,43,0.4);
+}
+
+.marketing-workflow-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.marketing-workflow-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.marketing-workflow-section h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.workflow-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.workflow-stage {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+  position: relative;
+}
+
+.workflow-stage.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stage-counter {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 25px rgba(255,75,43,0.3);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.stage-counter::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff7b00, #ff4b2b);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.workflow-stage:hover .stage-counter::before {
+  opacity: 1;
+}
+
+.workflow-stage:hover .stage-counter {
+  transform: scale(1.2) rotate(360deg);
+}
+
+.workflow-stage h4 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.workflow-stage p {
+  color: #7f8c8d;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Progress tracking */
+.scroll-tracker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.2);
+  z-index: 1001;
+}
+
+.scroll-indicator {
+  height: 100%;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b, #ff7b00);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Loading animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loading-megaphone {
+  width: 80px;
+  height: 100px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 40px 40px 15px 15px;
+  position: relative;
+  animation: loadingPulse 1.5s ease infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.loading-screen {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 15px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 8px;
+  animation: screenFlicker 1s ease infinite alternate;
+}
+
+@keyframes screenFlicker {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .marketing-development-hub {
+    padding: 60px 0 40px;
+    padding-right: 0;
+  }
+
+  .marketing-hero-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .marketing-hero-header .marketing-subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .marketing-service-card {
+    padding: 30px 20px;
+  }
+
+  .marketing-service-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .marketing-service-icon i {
+    font-size: 28px;
+  }
+
+  .marketing-service-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .marketing-service-card p {
+    font-size: 0.95rem;
+  }
+
+  .marketing-platforms-showcase {
+    padding: 30px 20px;
+  }
+
+  .marketing-platforms-showcase h2 {
+    font-size: 1.6rem;
+  }
+
+  .platform-badge {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .marketing-workflow-section {
+    padding: 30px 20px;
+  }
+
+  .marketing-workflow-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .stage-counter {
+    width: 55px;
+    height: 55px;
+    font-size: 1.5rem;
+  }
+
+  .workflow-stage h4 {
+    font-size: 1.2rem;
+  }
+
+  .workflow-stage p {
+    font-size: 0.95rem;
+  }
+
+  .megaphone-companion {
+    right: 10px;
+    transform: translateY(-50%) scale(0.7);
+  }
+
+  .megaphone-notification {
+    right: 100px;
+    font-size: 12px;
+    padding: 10px 15px;
+    min-width: 160px;
+  }
+
+  .scroll-tracker {
+    height: 4px;
+  }
+
+  .loading-megaphone {
+    width: 60px;
+    height: 80px;
+  }
+
+  .loading-screen {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 10px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="divmob">
+  <!-- Loading Screen -->
+  <div class="loading-overlay" id="loadingScreen">
+    <div class="loading-megaphone">
+      <div class="loading-screen"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Tracker -->
+  <div class="scroll-tracker">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="marketing-bg-elements" id="backgroundElements"></div>
+
+  <!-- Talking Megaphone Character -->
+  <div class="megaphone-companion" id="megaphoneCompanion">
+    <div class="smart-megaphone">
+      <div class="megaphone-device">
+        <div class="megaphone-screen">
+          <div class="megaphone-face">
+            <div class="megaphone-eyes">
+              <div class="megaphone-eye"></div>
+              <div class="megaphone-eye"></div>
+            </div>
+            <div class="megaphone-mouth" id="megaphoneMouth"></div>
+          </div>
+        </div>
+        <div class="megaphone-handle"></div>
+      </div>
+    </div>
+    <div class="megaphone-notification" id="megaphoneNotification">
+      Welcome to performance marketing!
+    </div>
+  </div>
+
+  <!-- Performance Marketing Section -->
+  <section class="marketing-development-hub">
+    <div class="marketing-container">
+      <div class="marketing-hero-header" id="heroHeader">
+        <h1>Performance Marketing</h1>
+        <p class="marketing-subtitle">Data-driven strategies that deliver measurable results and maximize ROI</p>
+      </div>
+      
+      <div class="marketing-services-grid" id="servicesGrid">
+        <div class="marketing-service-card" data-megaphone-msg="PPC advertising delivers immediate traffic and conversions with measurable ROI!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-ad"></i>
+          </div>
+          <h3>PPC Advertising</h3>
+          <p>Strategic pay-per-click campaigns across Google Ads, Microsoft Advertising, and social platforms to drive targeted traffic.</p>
+        </div>
+        
+        <div class="marketing-service-card" data-megaphone-msg="Social media advertising reaches your ideal audience where they spend their time!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-share-alt"></i>
+          </div>
+          <h3>Social Media Ads</h3>
+          <p>High-converting ad campaigns on Facebook, Instagram, LinkedIn, Twitter, and TikTok to grow your business.</p>
+        </div>
+        
+        <div class="marketing-service-card" data-megaphone-msg="SEO is the foundation of sustainable organic traffic growth!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Search Engine Optimization</h3>
+          <p>Comprehensive SEO strategies to improve rankings, drive organic traffic, and increase conversions.</p>
+        </div>
+        
+        <div class="marketing-service-card" data-megaphone-msg="Conversion rate optimization maximizes the value of your existing traffic!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3>CRO Optimization</h3>
+          <p>Data-driven testing and optimization to improve conversion rates and maximize marketing ROI.</p>
+        </div>
+        
+        <div class="marketing-service-card" data-megaphone-msg="Email marketing delivers the highest ROI of any marketing channel!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Email Marketing</h3>
+          <p>Automated email sequences and targeted campaigns that nurture leads and drive repeat purchases.</p>
+        </div>
+        
+        <div class="marketing-service-card" data-megaphone-msg="Attribution modeling helps you understand your true marketing ROI!">
+          <div class="marketing-service-icon">
+            <i class="fas fa-fingerprint"></i>
+          </div>
+          <h3>Attribution Modeling</h3>
+          <p>Advanced tracking and analytics to measure campaign performance across multiple touchpoints.</p>
+        </div>
+      </div>
+      
+      <div class="marketing-platforms-showcase" id="platformsShowcase" data-megaphone-msg="We leverage all major marketing platforms and analytics tools!">
+        <h2>Marketing Platforms & Technologies</h2>
+        <div class="platform-badges">
+          <span class="platform-badge">Google Ads</span>
+          <span class="platform-badge">Facebook Ads</span>
+          <span class="platform-badge">Google Analytics</span>
+          <span class="platform-badge">Google Tag Manager</span>
+          <span class="platform-badge">LinkedIn Ads</span>
+          <span class="platform-badge">TikTok Ads</span>
+          <span class="platform-badge">HubSpot</span>
+          <span class="platform-badge">Marketo</span>
+          <span class="platform-badge">Salesforce</span>
+          <span class="platform-badge">Hotjar</span>
+          <span class="platform-badge">Optimizely</span>
+          <span class="platform-badge">Klaviyo</span>
+        </div>
+      </div>
+      
+      <div class="marketing-workflow-section" id="workflowSection" data-megaphone-msg="Our proven marketing process ensures maximum ROI from your campaigns!">
+        <h2>Our Performance Marketing Process</h2>
+        <div class="workflow-timeline">
+          <div class="workflow-stage" data-megaphone-msg="Strategy phase: We analyze your business goals and create a comprehensive marketing strategy!">
+            <div class="stage-counter">1</div>
+            <h4>Strategy & Planning</h4>
+            <p>Comprehensive market research, audience analysis, and KPI definition to create a data-driven marketing roadmap.</p>
+          </div>
+          <div class="workflow-stage" data-megaphone-msg="Implementation phase: We set up tracking and launch high-converting campaigns!">
+            <div class="stage-counter">2</div>
+            <h4>Campaign Implementation</h4>
+            <p>Precise campaign setup with advanced tracking, audience segmentation, and conversion optimization.</p>
+          </div>
+          <div class="workflow-stage" data-megaphone-msg="Optimization phase: We continuously test and improve campaign performance!">
+            <div class="stage-counter">3</div>
+            <h4>Testing & Optimization</h4>
+            <p>Continuous A/B testing, bid adjustments, and creative refreshes to maximize campaign performance.</p>
+          </div>
+          <div class="workflow-stage" data-megaphone-msg="Analysis phase: We provide transparent reporting and actionable insights!">
+            <div class="stage-counter">4</div>
+            <h4>Reporting & Analysis</h4>
+            <p>Transparent reporting with actionable insights to demonstrate ROI and guide future marketing decisions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+   <div id="social"></div>
+      <div id="chatbot"></div>
+<div id="footer"></div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  
+  // Hide loading screen after 2 seconds
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }, 2000);
+  
+  // Create background elements
+  createBackgroundElements();
+  
+  // Initialize megaphone companion
+  initMegaphoneCompanion();
+  
+  // Set up scroll progress tracker
+  window.addEventListener('scroll', updateScrollProgress);
+  
+  // Set up intersection observers
+  setupObservers();
+  
+  // Set up hover effects for service cards
+  setupServiceCardHovers();
+  
+  // Initial megaphone greeting
+  setTimeout(() => {
+    megaphoneSpeak("Welcome to our performance marketing services! Hover over items to learn more.");
+  }, 2500);
+});
+
+// Create floating background icons
+function createBackgroundElements() {
+  const bgElements = document.getElementById('backgroundElements');
+  const icons = ['📈', '📊', '📢', '💰', '🔍', '🎯', '📱', '💻'];
+  
+  for (let i = 0; i < 30; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'floating-icon';
+    icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+    icon.style.left = Math.random() * 100 + '%';
+    icon.style.top = Math.random() * 100 + '%';
+    icon.style.animationDelay = Math.random() * 8 + 's';
+    icon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    bgElements.appendChild(icon);
+  }
+}
+
+// Megaphone speech functionality
+const megaphoneMouth = document.getElementById('megaphoneMouth');
+const megaphoneNotification = document.getElementById('megaphoneNotification');
+let currentMessage = null;
+
+function megaphoneSpeak(message, duration = 3500) {
+  if (currentMessage) clearTimeout(currentMessage);
+  
+  megaphoneNotification.textContent = message;
+  megaphoneNotification.classList.add('active');
+  megaphoneMouth.classList.add('speaking');
+  
+  currentMessage = setTimeout(() => {
+    megaphoneNotification.classList.remove('active');
+    megaphoneMouth.classList.remove('speaking');
+  }, duration);
+}
+
+// Initialize megaphone companion interactions
+function initMegaphoneCompanion() {
+  const megaphoneCompanion = document.getElementById('megaphoneCompanion');
+  
+  // Make megaphone draggable
+  let isDragging = false;
+  let offsetX, offsetY;
+  
+  megaphoneCompanion.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - megaphoneCompanion.getBoundingClientRect().left;
+    offsetY = e.clientY - megaphoneCompanion.getBoundingClientRect().top;
+    megaphoneCompanion.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Constrain to viewport
+    const maxX = window.innerWidth - megaphoneCompanion.offsetWidth;
+    const maxY = window.innerHeight - megaphoneCompanion.offsetHeight;
+    
+    megaphoneCompanion.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+    megaphoneCompanion.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    megaphoneCompanion.style.right = 'auto';
+    megaphoneCompanion.style.transform = 'translateY(0)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    megaphoneCompanion.style.cursor = 'grab';
+  });
+  
+  // Click to speak random tip
+  megaphoneCompanion.addEventListener('click', (e) => {
+    if (isDragging) return;
+    
+    const tips = [
+      "Did you know? Performance marketing focuses on measurable results!",
+      "PPC campaigns can deliver immediate traffic and conversions!",
+      "Conversion rate optimization can increase revenue by 20-50%!",
+      "Proper tracking is essential for accurate ROI measurement!",
+      "Retargeting can increase conversion rates by 150% or more!",
+      "Email marketing delivers $42 ROI for every $1 spent on average!"
+    ];
+    
+    megaphoneSpeak(tips[Math.floor(Math.random() * tips.length)]);
+  });
+}
+
+// Scroll progress tracking
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+}
+
+// Set up intersection observers for scroll animations
+function setupObservers() {
+  const observerConfig = {
+    threshold: 0.15,
+    rootMargin: '-30px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in', 'slide-in', 'reveal', 'visible');
+        
+        // Megaphone speaks when elements come into view
+        const megaphoneMessage = entry.target.getAttribute('data-megaphone-msg');
+        if (megaphoneMessage) {
+          setTimeout(() => {
+            megaphoneSpeak(megaphoneMessage, 4500);
+          }, 600);
+        }
+        
+        // Animate workflow stages with stagger
+        if (entry.target.classList.contains('marketing-workflow-section')) {
+          const stages = entry.target.querySelectorAll('.workflow-stage');
+          stages.forEach((stage, index) => {
+            setTimeout(() => {
+              stage.classList.add('animate');
+            }, index * 250);
+          });
+        }
+        
+        // Animate service cards with stagger
+        if (entry.target.classList.contains('marketing-services-grid')) {
+          const cards = entry.target.querySelectorAll('.marketing-service-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('slide-in');
+            }, index * 200);
+          });
+        }
+      }
+    });
+  }, observerConfig);
+
+  // Observe all sections that need animation
+  document.querySelectorAll('.marketing-hero-header, .marketing-service-card, .marketing-platforms-showcase, .marketing-workflow-section')
+    .forEach(el => scrollObserver.observe(el));
+}
+
+// Set up hover effects for service cards
+function setupServiceCardHovers() {
+  const serviceCards = document.querySelectorAll('.marketing-service-card');
+  
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const message = card.getAttribute('data-megaphone-msg');
+      if (message) {
+        megaphoneSpeak(message);
+      }
+    });
+    
+    // Add slight tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angleX = (y - centerY) / 20;
+      const angleY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.05)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+  
+  // Add hover effects to platform badges
+  const platformBadges = document.querySelectorAll('.platform-badge');
+  
+  platformBadges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      const tech = badge.textContent;
+      const messages = {
+        'Google Ads': 'Google Ads dominates search advertising with 90% market share!',
+        'Facebook Ads': 'Facebook Ads offer precise targeting to 2.9 billion active users!',
+        'Google Analytics': 'Google Analytics provides deep insights into user behavior!',
+        'Google Tag Manager': 'GTM simplifies tag management without developer help!',
+        'LinkedIn Ads': 'LinkedIn is the premier B2B advertising platform!',
+        'TikTok Ads': 'TikTok offers access to a highly engaged Gen Z audience!',
+        'HubSpot': 'HubSpot provides all-in-one marketing automation!',
+        'Marketo': 'Marketo is a powerful enterprise marketing automation platform!',
+        'Salesforce': 'Salesforce is the #1 CRM for managing customer relationships!',
+        'Hotjar': 'Hotjar reveals how users interact with your website!',
+        'Optimizely': 'Optimizely enables advanced A/B testing and personalization!',
+        'Klaviyo': 'Klaviyo specializes in ecommerce email marketing!'
+      };
+      
+      if (messages[tech]) {
+        megaphoneSpeak(messages[tech]);
+      }
+    });
+  });
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  // Reset megaphone companion position if it goes off screen
+  const megaphoneCompanion = document.getElementById('megaphoneCompanion');
+  const rect = megaphoneCompanion.getBoundingClientRect();
+  
+  if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+    megaphoneCompanion.style.left = 'auto';
+    megaphoneCompanion.style.top = '50%';
+    megaphoneCompanion.style.right = '40px';
+    megaphoneCompanion.style.transform = 'translateY(-50%)';
+  }
+});
+  </script>
+   <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+</body>
+</html>

@@ -14,6 +14,8 @@
       --gradient-bg: linear-gradient(135deg, #6c4dd4 0%, #4d8fd4 100%);
       --box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
       --transition-all: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+       --geinca-primary: #2563eb;
+ --geinca-accent: #ec4899;
     }
 
     * {
@@ -854,29 +856,170 @@
     width: 70px;
   }
 }
+
+
+/* Logo and Company Name Styles */
+.nexus-logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nexus-round-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-accent);
+}
+
+.nexus-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.nexus-company-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+   background: linear-gradient(45deg, var(--geinca-primary), var(--geinca-accent));
+  -webkit-background-clip: text;
+ color: transparent;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.nexus-tagline {
+  font-size: 15px;
+   font-weight: 600;
+  color: #292a2b;
+  margin: 0;
+  line-height: 1.3;
+}
+
+
+/* Appointment Button */
+.nexus-appointment-btn {
+  background: var(--gradient-bg);
+  color: white !important;
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  margin-left: 15px !important;
+  transition: var(--transition-all);
+}
+
+.nexus-appointment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 77, 212, 0.3);
+}
+
+/* Adjust header layout */
+/* Base Navbar Styles */
+.nexus-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative; /* For absolute positioning of hamburger */
+}
+
+/* Logo Styles */
+.nexus-logo-container {
+  display: flex;
+  align-items: center;
+  z-index: 100; /* Ensures logo stays above mobile menu */
+}
+
+.nexus-round-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* Desktop Navigation */
+.nexus-desktop-nav {
+  display: flex;
+}
+
+/* Mobile Hamburger Menu */
+.nexus-hamburger {
+  display: none;
+  cursor: pointer;
+  z-index: 100;
+  position: fixed; /* Changed from absolute to fixed */
+  top: 25px;
+  right: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .nexus-desktop-nav {
+    display: none;
+  }
+  
+  .nexus-hamburger {
+    display: block;
+  }
+  
+  .nexus-round-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nexus-nav-container {
+    padding: 15px;
+  }
+  
+  .nexus-hamburger {
+    top: 18px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nexus-round-logo {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .nexus-hamburger {
+    top: 15px;
+    right: 12px;
+  }
+}
   </style>
 </head>
 <body>
 
   <!-- Navigation -->
-  <header class="nexus-header">
-    <div class="nexus-nav-container">
-      <button class="nexus-menu-toggle" onclick="toggleNexusMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav class="nexus-desktop-nav">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="blogpage.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <div class="nexus-logo-center">
-        <img src="https://i.ibb.co/vC8sJJfY/glogo.png" alt="Nexus Logo" />
+ <!-- Navigation -->
+<header class="nexus-header">
+  <div class="nexus-nav-container">
+    <div class="nexus-logo-wrapper">
+      <img src="images/l.jpg" alt="Geinca Logo" class="nexus-round-logo" />
+      <div class="nexus-logo-text">
+        <h1 class="nexus-company-name">Geinca Futuristic Tech OPC Pvt. Ltd.</h1>
+        <p class="nexus-tagline">Digital Solutions for a Smarter Future</p>
       </div>
     </div>
-  </header>
-
+    
+    <nav class="nexus-desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="blogpage.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="appointment.html" class="nexus-appointment-btn">Book Appointment</a>
+    </nav>
+    
+    <button class="nexus-menu-toggle" onclick="toggleNexusMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
 
 
 
@@ -895,23 +1038,27 @@
   <div class="nexus-menu-content">
     <div class="nexus-menu-left">
       <ul>
-        <li><a href="index.html">Home</a></li>
-         <li><a href="services.html">Services</a></li>
-       <!-- <li>
+        <li><a href="/">Home</a></li>
+         <!-- <li><a href="services.html">Services</a></li> -->
+       <li>
   <details>
     <summary>
       Services
       <span class="expand-icon"style="color: white;" onclick="event.stopPropagation(); this.parentElement.click()">+</span>
     </summary>
     <ul>
-      <li><a href="#">Web Design</a></li>
-      <li><a href="#">App Development</a></li>
-      <li><a href="#">Digital Marketing</a></li>
-      <li><a href="#">UI/UX Design</a></li>
+        <li><a href="software.html">Software Development</a></li>
+      <li><a href="mobiledev.html">Mobile Development</a></li>
+      <li><a href="webdev.html">Web Development</a></li>
+      <li><a href="socialmediamarketing.html">Social Media Marketing</a></li>
+      <li><a href="marketing.html">Perfomance Marketing</a></li>
+      <li><a href="seo.html">SEO Optimization</a></li>
+      <li><a href="digitalmarketing.html">Digital Marketing</a></li>
+      <li><a href="graphicdesign.html">Graphic Design</a></li>
     </ul>
   </details>
 </li>
-<li>
+<!-- <li>
   <details>
     <summary>
       Work
@@ -926,6 +1073,13 @@
         <li><a href="about.html">About</a></li>
          <li><a href="blogpage.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
+       <li>
+  <a href="appointment.html" class="nexus-appointment-btn" 
+     style="display: inline-block; width: 50%; padding: 12px 20px; background-color: #007BFF; color: #fff; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; font-family: Arial, sans-serif; transition: background-color 0.3s;">
+     Book Appointment
+  </a>
+</li>
+
       </ul>
       
       <div class="nexus-social-links">
@@ -937,7 +1091,7 @@
     </div>
     
     <div class="nexus-menu-right">
-      <div class="nexus-menu-image" style="background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"></div>
+      <div class="nexus-menu-image" style="background-image: url('https://i.ibb.co/CKHcJY52/2025-03-26.webp')"></div>
       <div class="nexus-menu-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"></div>
       <div class="nexus-menu-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"></div>
     </div>

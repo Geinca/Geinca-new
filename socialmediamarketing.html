@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Social Media Marketing | ViralGrowth Solutions</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.divmob {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #405DE6 0%, #5851DB 20%, #833AB4 40%, #C13584 60%, #E1306C 80%, #FD1D1D 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated background elements */
+.social-bg-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.15);
+  animation: floatAround 8s ease-in-out infinite;
+}
+
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  25% { transform: translateY(-30px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+  75% { transform: translateY(-25px) rotate(270deg); opacity: 0.6; }
+}
+
+/* Talking Social Media Expert Character */
+.expert-companion {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  transition: all 0.4s ease;
+  cursor: grab;
+}
+
+.social-expert {
+  width: 120px;
+  height: 220px;
+  position: relative;
+  animation: expertFloat 4s ease-in-out infinite;
+}
+
+@keyframes expertFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.expert-body {
+  width: 100px;
+  height: 180px;
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  margin: 0 auto;
+}
+
+.expert-head {
+  width: 80px;
+  height: 80px;
+  background: #f5d6b1;
+  border-radius: 50%;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.expert-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  text-align: center;
+}
+
+.expert-eyes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.expert-eye {
+  width: 10px;
+  height: 10px;
+  background: #2c3e50;
+  border-radius: 50%;
+  animation: expertBlink 5s infinite;
+}
+
+@keyframes expertBlink {
+  0%, 95% { height: 10px; border-radius: 50%; }
+  96%, 100% { height: 2px; border-radius: 5px; }
+}
+
+.expert-mouth {
+  width: 25px;
+  height: 10px;
+  background: #2c3e50;
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto;
+  transition: all 0.2s ease;
+}
+
+.expert-mouth.speaking {
+  animation: expertTalk 0.4s ease infinite alternate;
+}
+
+@keyframes expertTalk {
+  0% { height: 10px; border-radius: 0 0 20px 20px; }
+  100% { height: 5px; border-radius: 10px; }
+}
+
+.expert-phone {
+  width: 40px;
+  height: 70px;
+  background: #111;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  box-shadow: 0 0 0 2px #333;
+}
+
+.expert-phone::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.expert-phone::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.expert-notification {
+  position: absolute;
+  top: -50px;
+  right: 140px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 18px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  min-width: 200px;
+  opacity: 0;
+  transform: scale(0.8) translateX(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 14px;
+  color: #333;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.expert-notification::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 20px;
+  border: 8px solid transparent;
+  border-left-color: rgba(255, 255, 255, 0.95);
+}
+
+.expert-notification.active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+/* Main Social Media Marketing Section */
+.social-marketing-hub {
+  padding: 80px 0 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-right: 160px;
+}
+
+.social-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.social-hero-header {
+  text-align: center;
+  margin-bottom: 70px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.social-hero-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-hero-header h1 {
+  font-size: 4rem;
+  background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  font-weight: 900;
+  text-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  line-height: 1.1;
+}
+
+.social-hero-header .social-subtitle {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.social-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  margin-bottom: 70px;
+}
+
+.social-service-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 45px 35px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(50px) rotateX(10deg);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.social-service-card:hover::before {
+  left: 100%;
+}
+
+.social-service-card.slide-in {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.social-service-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.social-service-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 30px;
+  background: linear-gradient(135deg, #405DE6, #833AB4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.4s ease;
+  animation: iconBounce 3s ease infinite;
+  position: relative;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.05) rotate(-5deg); }
+}
+
+.social-service-card:hover .social-service-icon {
+  animation-play-state: paused;
+  transform: scale(1.3) rotate(360deg);
+  background: linear-gradient(135deg, #E1306C, #FD1D1D);
+}
+
+.social-service-icon i {
+  font-size: 40px;
+}
+
+.social-service-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.social-service-card p {
+  color: #7f8c8d;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.social-platforms-showcase {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  margin-bottom: 70px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.social-platforms-showcase.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-platforms-showcase h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.platform-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.platform-badge {
+  background: linear-gradient(135deg, #405DE6, #833AB4);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(64,93,230,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.platform-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.platform-badge:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.platform-badge:hover {
+  transform: translateY(-8px) scale(1.1);
+  box-shadow: 0 15px 35px rgba(64,93,230,0.4);
+}
+
+.social-workflow-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.social-workflow-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-workflow-section h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.workflow-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.workflow-stage {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+  position: relative;
+}
+
+.workflow-stage.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stage-counter {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #405DE6, #833AB4);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 25px rgba(64,93,230,0.3);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.stage-counter::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #E1306C, #FD1D1D);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.workflow-stage:hover .stage-counter::before {
+  opacity: 1;
+}
+
+.workflow-stage:hover .stage-counter {
+  transform: scale(1.2) rotate(360deg);
+}
+
+.workflow-stage h4 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.workflow-stage p {
+  color: #7f8c8d;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Progress tracking */
+.scroll-tracker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.2);
+  z-index: 1001;
+}
+
+.scroll-indicator {
+  height: 100%;
+  background: linear-gradient(90deg, #405DE6, #833AB4, #E1306C, #FD1D1D);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Loading animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #405DE6, #833AB4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loading-salesman {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  animation: loadingPulse 1.5s ease infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.loading-face {
+  width: 60px;
+  height: 60px;
+  background: #f5d6b1;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: faceFlicker 1s ease infinite alternate;
+}
+
+@keyframes faceFlicker {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .expert-companion {
+    right: 20px;
+    transform: translateY(-50%) scale(0.8);
+    position: fixed;
+  }
+
+  .social-marketing-hub {
+    padding: 60px 0 40px;
+    padding-right: 0;
+  }
+
+  .social-hero-header h1 {
+    font-size: 2.8rem;
+  }
+
+  .social-hero-header .social-subtitle {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+
+  .social-services-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .expert-notification {
+    right: 110px;
+    min-width: 140px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  .social-platforms-showcase {
+    padding: 30px 20px;
+  }
+
+  .social-workflow-section {
+    padding: 30px 20px;
+  }
+
+  .workflow-timeline {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expert-companion {
+    right: 15px;
+    transform: translateY(-50%) scale(0.7);
+  }
+
+  .social-hero-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .social-service-card {
+    padding: 30px 20px;
+  }
+
+  .platform-badges {
+    gap: 10px;
+  }
+
+  .platform-badge {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+  </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="divmob">
+  <!-- Loading Screen -->
+  <div class="loading-overlay" id="loadingScreen">
+    <div class="loading-salesman">
+      <div class="loading-face"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Tracker -->
+  <div class="scroll-tracker">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="social-bg-elements" id="backgroundElements"></div>
+
+  <!-- Talking Social Media Expert Character -->
+  <div class="expert-companion" id="expertCompanion">
+    <div class="social-expert">
+      <div class="expert-body">
+        <div class="expert-head">
+          <div class="expert-face">
+            <div class="expert-eyes">
+              <div class="expert-eye"></div>
+              <div class="expert-eye"></div>
+            </div>
+            <div class="expert-mouth" id="expertMouth"></div>
+          </div>
+        </div>
+        <div class="expert-phone"></div>
+      </div>
+    </div>
+    <div class="expert-notification" id="expertNotification">
+      Welcome to social media marketing services!
+    </div>
+  </div>
+
+  <!-- Social Media Marketing Section -->
+  <section class="social-marketing-hub">
+    <div class="social-container">
+      <div class="social-hero-header" id="heroHeader">
+        <h1>Social Media Marketing</h1>
+        <p class="social-subtitle">Amplify your brand's presence and engagement across all social platforms</p>
+      </div>
+      
+      <div class="social-services-grid" id="servicesGrid">
+        <div class="social-service-card" data-expert-msg="Content strategy is key to keeping your audience engaged and coming back for more!">
+          <div class="social-service-icon">
+            <i class="fas fa-pencil-alt"></i>
+          </div>
+          <h3>Content Strategy</h3>
+          <p>Strategic content planning and creation tailored for each social platform to maximize engagement.</p>
+        </div>
+        
+        <div class="social-service-card" data-expert-msg="Paid social ads can deliver targeted reach with measurable ROI!">
+          <div class="social-service-icon">
+            <i class="fas fa-ad"></i>
+          </div>
+          <h3>Paid Social Advertising</h3>
+          <p>Targeted ad campaigns on Facebook, Instagram, LinkedIn, Twitter and other social platforms.</p>
+        </div>
+        
+        <div class="social-service-card" data-expert-msg="Influencer partnerships can dramatically expand your brand's reach!">
+          <div class="social-service-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3>Influencer Marketing</h3>
+          <p>Strategic partnerships with relevant influencers to authentically promote your brand.</p>
+        </div>
+        
+        <div class="social-service-card" data-expert-msg="Community management builds loyal brand advocates!">
+          <div class="social-service-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Community Management</h3>
+          <p>Active engagement with your audience to build relationships and brand loyalty.</p>
+        </div>
+        
+        <div class="social-service-card" data-expert-msg="Analytics help us refine and optimize your social strategy!">
+          <div class="social-service-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Analytics & Reporting</h3>
+          <p>Comprehensive performance tracking and insights to measure campaign effectiveness.</p>
+        </div>
+        
+        <div class="social-service-card" data-expert-msg="Video content generates significantly higher engagement!">
+          <div class="social-service-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3>Video Content Creation</h3>
+          <p>High-impact video content optimized for each social platform's algorithm.</p>
+        </div>
+      </div>
+      
+      <div class="social-platforms-showcase" id="platformsShowcase" data-expert-msg="We specialize in all major social platforms to maximize your reach!">
+        <h2>Social Media Platforms</h2>
+        <div class="platform-badges">
+          <span class="platform-badge">Facebook</span>
+          <span class="platform-badge">Instagram</span>
+          <span class="platform-badge">LinkedIn</span>
+          <span class="platform-badge">Twitter</span>
+          <span class="platform-badge">TikTok</span>
+          <span class="platform-badge">YouTube</span>
+          <span class="platform-badge">Pinterest</span>
+          <span class="platform-badge">Snapchat</span>
+        </div>
+      </div>
+      
+      <div class="social-workflow-section" id="workflowSection" data-expert-msg="Our proven social media process delivers consistent results!">
+        <h2>Our Social Media Process</h2>
+        <div class="workflow-timeline">
+          <div class="workflow-stage" data-expert-msg="First we analyze your brand, audience and competitors!">
+            <div class="stage-counter">1</div>
+            <h4>Audience Research</h4>
+            <p>Comprehensive analysis of your target audience, competitors and industry trends.</p>
+          </div>
+          <div class="workflow-stage" data-expert-msg="Next we develop a customized content strategy!">
+            <div class="stage-counter">2</div>
+            <h4>Strategy Development</h4>
+            <p>Creating a tailored content calendar and posting strategy for each platform.</p>
+          </div>
+          <div class="workflow-stage" data-expert-msg="Then we create and optimize engaging content!">
+            <div class="stage-counter">3</div>
+            <h4>Content Creation</h4>
+            <p>Producing high-quality, platform-specific content that resonates with your audience.</p>
+          </div>
+          <div class="workflow-stage" data-expert-msg="Finally we monitor, engage and optimize!">
+            <div class="stage-counter">4</div>
+            <h4>Engagement & Optimization</h4>
+            <p>Active community management and continuous performance optimization.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+   <div id="social"></div>
+      <div id="chatbot"></div>
+<div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script src="/assets/js/script.js"></script>
+  <script src="/assets/js/comp.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  
+  // Hide loading screen after 2 seconds
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }, 2000);
+  
+  // Create background elements
+  createBackgroundElements();
+  
+  // Initialize expert companion
+  initExpertCompanion();
+  
+  // Set up scroll progress tracker
+  window.addEventListener('scroll', updateScrollProgress);
+  
+  // Set up intersection observers
+  setupObservers();
+  
+  // Set up hover effects for service cards
+  setupServiceCardHovers();
+  
+  // Initial expert greeting
+  setTimeout(() => {
+    expertSpeak("Welcome to our social media marketing services! Hover over items to learn more.");
+  }, 2500);
+});
+
+// Create floating background icons
+function createBackgroundElements() {
+  const bgElements = document.getElementById('backgroundElements');
+  const icons = ['👍', '❤️', '📱', '📸', '💬', '📊', '🎥', '🔍', '📈', '🔄'];
+  
+  for (let i = 0; i < 30; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'floating-icon';
+    icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+    icon.style.left = Math.random() * 100 + '%';
+    icon.style.top = Math.random() * 100 + '%';
+    icon.style.animationDelay = Math.random() * 8 + 's';
+    icon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    bgElements.appendChild(icon);
+  }
+}
+
+// Expert speech functionality
+const expertMouth = document.getElementById('expertMouth');
+const expertNotification = document.getElementById('expertNotification');
+let currentMessage = null;
+
+function expertSpeak(message, duration = 3500) {
+  if (currentMessage) clearTimeout(currentMessage);
+  
+  expertNotification.textContent = message;
+  expertNotification.classList.add('active');
+  expertMouth.classList.add('speaking');
+  
+  currentMessage = setTimeout(() => {
+    expertNotification.classList.remove('active');
+    expertMouth.classList.remove('speaking');
+  }, duration);
+}
+
+// Initialize expert companion interactions
+function initExpertCompanion() {
+  const expertCompanion = document.getElementById('expertCompanion');
+  
+  // Make expert draggable
+  let isDragging = false;
+  let offsetX, offsetY;
+  
+  expertCompanion.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - expertCompanion.getBoundingClientRect().left;
+    offsetY = e.clientY - expertCompanion.getBoundingClientRect().top;
+    expertCompanion.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Constrain to viewport
+    const maxX = window.innerWidth - expertCompanion.offsetWidth;
+    const maxY = window.innerHeight - expertCompanion.offsetHeight;
+    
+    expertCompanion.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+    expertCompanion.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    expertCompanion.style.right = 'auto';
+    expertCompanion.style.transform = 'translateY(0)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    expertCompanion.style.cursor = 'grab';
+  });
+  
+  // Click to speak random tip
+  expertCompanion.addEventListener('click', (e) => {
+    if (isDragging) return;
+    
+    const tips = [
+      "Did you know? Video posts generate 48% more views than other content types!",
+      "Instagram Stories have 500 million daily active users worldwide!",
+      "Posts with hashtags get 12.6% more engagement than those without!",
+      "The best time to post on Facebook is between 1pm-3pm on weekdays!",
+      "LinkedIn content gets 3x more engagement when it includes images!",
+      "TikTok users spend an average of 52 minutes per day on the app!"
+    ];
+    
+    expertSpeak(tips[Math.floor(Math.random() * tips.length)]);
+  });
+}
+
+// Scroll progress tracking
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+}
+
+// Set up intersection observers for scroll animations
+function setupObservers() {
+  const observerConfig = {
+    threshold: 0.15,
+    rootMargin: '-30px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in', 'slide-in', 'reveal', 'visible');
+        
+        // Expert speaks when elements come into view
+        const expertMessage = entry.target.getAttribute('data-expert-msg');
+        if (expertMessage) {
+          setTimeout(() => {
+            expertSpeak(expertMessage, 4500);
+          }, 600);
+        }
+        
+        // Animate workflow stages with stagger
+        if (entry.target.classList.contains('social-workflow-section')) {
+          const stages = entry.target.querySelectorAll('.workflow-stage');
+          stages.forEach((stage, index) => {
+            setTimeout(() => {
+              stage.classList.add('animate');
+            }, index * 250);
+          });
+        }
+        
+        // Animate service cards with stagger
+        if (entry.target.classList.contains('social-services-grid')) {
+          const cards = entry.target.querySelectorAll('.social-service-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('slide-in');
+            }, index * 200);
+          });
+        }
+      }
+    });
+  }, observerConfig);
+
+  // Observe all sections that need animation
+  document.querySelectorAll('.social-hero-header, .social-service-card, .social-platforms-showcase, .social-workflow-section')
+    .forEach(el => scrollObserver.observe(el));
+}
+
+// Set up hover effects for service cards
+function setupServiceCardHovers() {
+  const serviceCards = document.querySelectorAll('.social-service-card');
+  
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const message = card.getAttribute('data-expert-msg');
+      if (message) {
+        expertSpeak(message);
+      }
+    });
+    
+    // Add slight tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angleX = (y - centerY) / 20;
+      const angleY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.05)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+  
+  // Add hover effects to platform badges
+  const platformBadges = document.querySelectorAll('.platform-badge');
+  
+  platformBadges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      const platform = badge.textContent;
+      const messages = {
+        'Facebook': 'Facebook has 2.9 billion monthly active users - great for broad reach!',
+        'Instagram': 'Instagram is perfect for visual storytelling and younger demographics!',
+        'LinkedIn': 'LinkedIn is the top platform for B2B marketing and professional networking!',
+        'Twitter': 'Twitter excels at real-time engagement and trending conversations!',
+        'TikTok': 'TikTok has explosive growth with highly engaging short-form video content!',
+        'YouTube': 'YouTube is the second largest search engine after Google itself!',
+        'Pinterest': 'Pinterest drives high purchase intent with its visual discovery platform!',
+        'Snapchat': 'Snapchat dominates the teen demographic with ephemeral content!'
+      };
+      
+      if (messages[platform]) {
+        expertSpeak(messages[platform]);
+      }
+    });
+  });
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  // Reset expert companion position if it goes off screen
+  const expertCompanion = document.getElementById('expertCompanion');
+  const rect = expertCompanion.getBoundingClientRect();
+  
+  if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+    expertCompanion.style.left = 'auto';
+    expertCompanion.style.top = '50%';
+    expertCompanion.style.right = '40px';
+    expertCompanion.style.transform = 'translateY(-50%)';
+  }
+});
+  </script>
+</body>
+</html>

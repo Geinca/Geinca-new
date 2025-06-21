@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Development | TechWeb Solutions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .divweb {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    .web-bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .floating-icon {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.1);
+      animation: floatAround 8s ease-in-out infinite;
+    }
+
+    @keyframes floatAround {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      25% { transform: translateY(-30px) rotate(90deg); opacity: 0.8; }
+      50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+      75% { transform: translateY(-25px) rotate(270deg); opacity: 0.6; }
+    }
+
+    /* Talking Laptop Character */
+    .laptop-companion {
+      position: fixed;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      transition: all 0.4s ease;
+      cursor: grab;
+    }
+
+    .smart-laptop {
+      width: 160px;
+      height: 120px;
+      position: relative;
+      animation: laptopFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes laptopFloat {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-15px) rotate(1deg); }
+    }
+
+    .laptop-base {
+      width: 160px;
+      height: 12px;
+      background: linear-gradient(145deg, #2a2a2a, #444444);
+      border-radius: 8px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .laptop-screen {
+      width: 150px;
+      height: 95px;
+      background: linear-gradient(145deg, #1a1a1a, #333333);
+      border-radius: 8px 8px 2px 2px;
+      position: absolute;
+      bottom: 8px;
+      left: 5px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      border: 3px solid #444;
+      transform-origin: bottom center;
+      animation: screenTilt 6s ease-in-out infinite;
+    }
+
+    @keyframes screenTilt {
+      0%, 100% { transform: rotateX(-5deg); }
+      50% { transform: rotateX(-15deg); }
+    }
+
+    .laptop-display {
+      width: 130px;
+      height: 75px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border-radius: 5px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      animation: displayGlow 3s ease infinite;
+    }
+
+    @keyframes displayGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(79, 172, 254, 0.5); }
+      50% { box-shadow: 0 0 35px rgba(79, 172, 254, 0.8); }
+    }
+
+    .laptop-face {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    .laptop-eyes {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .laptop-eye {
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      animation: laptopWink 6s infinite;
+    }
+
+    @keyframes laptopWink {
+      0%, 94% { opacity: 1; }
+      95%, 100% { opacity: 0; }
+    }
+
+    .laptop-mouth {
+      width: 25px;
+      height: 12px;
+      background: white;
+      border-radius: 0 0 25px 25px;
+      margin: 0 auto;
+      transition: all 0.2s ease;
+    }
+
+    .laptop-mouth.speaking {
+      animation: laptopTalk 0.4s ease infinite alternate;
+    }
+
+    @keyframes laptopTalk {
+      0% { height: 12px; border-radius: 0 0 25px 25px; }
+      100% { height: 6px; border-radius: 12px; }
+    }
+
+    .laptop-keyboard {
+      width: 140px;
+      height: 8px;
+      background: linear-gradient(145deg, #333, #555);
+      border-radius: 2px;
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .laptop-trackpad {
+      width: 30px;
+      height: 4px;
+      background: #666;
+      border-radius: 2px;
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .laptop-notification {
+      position: absolute;
+      top: -60px;
+      right: 170px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      min-width: 200px;
+      opacity: 0;
+      transform: scale(0.8) translateX(20px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 14px;
+      color: #333;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .laptop-notification::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 25px;
+      border: 10px solid transparent;
+      border-left-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .laptop-notification.active {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+
+    /* Main Web Development Section */
+    .web-development-hub {
+      padding: 80px 0 60px;
+      min-height: 100vh;
+      position: relative;
+      padding-right: 200px;
+    }
+
+    .web-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
+
+    .web-hero-header {
+      text-align: center;
+      margin-bottom: 70px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .web-hero-header.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .web-hero-header h1 {
+      font-size: 4rem;
+      background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 25px;
+      font-weight: 900;
+      text-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      line-height: 1.1;
+    }
+
+    .web-hero-header .web-subtitle {
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .web-services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-bottom: 70px;
+    }
+
+    .web-service-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 45px 35px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(50px) rotateX(10deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .web-service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .web-service-card:hover::before {
+      left: 100%;
+    }
+
+    .web-service-card.slide-in {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+
+    .web-service-card:hover {
+      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+
+    .web-service-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.4s ease;
+      animation: iconBounce 3s ease infinite;
+      position: relative;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(5deg); }
+      75% { transform: scale(1.05) rotate(-5deg); }
+    }
+
+    .web-service-card:hover .web-service-icon {
+      animation-play-state: paused;
+      transform: scale(1.3) rotate(360deg);
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .web-service-icon i {
+      font-size: 40px;
+    }
+
+    .web-service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .web-service-card p {
+      color: #7f8c8d;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .web-technologies-showcase {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 50px;
+      margin-bottom: 70px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .web-technologies-showcase.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .web-technologies-showcase h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2c3e50;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .tech-badge {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-badge::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.4s ease;
+    }
+
+    .tech-badge:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .tech-badge:hover {
+      transform: translateY(-8px) scale(1.1);
+      box-shadow: 0 15px 35px rgba(102,126,234,0.4);
+    }
+
+    .web-workflow-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 50px;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .web-workflow-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .web-workflow-section h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      color: #2c3e50;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .workflow-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .workflow-stage {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease;
+      position: relative;
+    }
+
+    .workflow-stage.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stage-counter {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 0 auto 25px;
+      box-shadow: 0 10px 25px rgba(102,126,234,0.3);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .stage-counter::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .workflow-stage:hover .stage-counter::before {
+      opacity: 1;
+    }
+
+    .workflow-stage:hover .stage-counter {
+      transform: scale(1.2) rotate(360deg);
+    }
+
+    .workflow-stage h4 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .workflow-stage p {
+      color: #7f8c8d;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* Progress tracking */
+    .scroll-tracker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(255,255,255,0.2);
+      z-index: 1001;
+    }
+
+    .scroll-indicator {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+      .laptop-companion {
+        right: 20px;
+        transform: translateY(-50%) scale(0.8);
+        position: fixed;
+      }
+
+      .web-development-hub {
+        padding: 60px 0 40px;
+        padding-right: 0;
+      }
+
+      .web-hero-header h1 {
+        font-size: 2.8rem;
+      }
+
+      .web-hero-header .web-subtitle {
+        font-size: 1.1rem;
+        padding: 0 15px;
+      }
+
+      .web-services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .laptop-notification {
+        right: 140px;
+        min-width: 160px;
+        font-size: 12px;
+        padding: 12px 16px;
+      }
+
+      .web-technologies-showcase {
+        padding: 30px 20px;
+      }
+
+      .web-workflow-section {
+        padding: 30px 20px;
+      }
+
+      .workflow-timeline {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .laptop-companion {
+        right: 15px;
+        transform: translateY(-50%) scale(0.7);
+      }
+
+      .web-hero-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .web-service-card {
+        padding: 30px 20px;
+      }
+
+      .tech-badges {
+        gap: 10px;
+      }
+
+      .tech-badge {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-laptop {
+      width: 80px;
+      height: 60px;
+      position: relative;
+      animation: loadingPulse 1.5s ease infinite;
+    }
+
+    @keyframes loadingPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .loading-screen {
+      width: 70px;
+      height: 45px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 5px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      animation: screenFlicker 1s ease infinite alternate;
+    }
+
+    .loading-base {
+      width: 80px;
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 4px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    @keyframes screenFlicker {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+      <div id="nav"></div>
+  <div class="divweb">
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingScreen">
+      <div class="loading-laptop">
+        <div class="loading-screen"></div>
+        <div class="loading-base"></div>
+      </div>
+    </div>
+
+    <!-- Scroll Progress Tracker -->
+    <div class="scroll-tracker">
+      <div class="scroll-indicator" id="scrollIndicator"></div>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="web-bg-elements" id="backgroundElements"></div>
+
+    <!-- Talking Laptop Character -->
+    <div class="laptop-companion" id="laptopCompanion">
+      <div class="smart-laptop">
+        <div class="laptop-screen">
+          <div class="laptop-display">
+            <div class="laptop-face">
+              <div class="laptop-eyes">
+                <div class="laptop-eye"></div>
+                <div class="laptop-eye"></div>
+              </div>
+              <div class="laptop-mouth" id="laptopMouth"></div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base">
+          <div class="laptop-keyboard"></div>
+          <div class="laptop-trackpad"></div>
+        </div>
+      </div>
+      <div class="laptop-notification" id="laptopNotification">
+        Welcome to web development!
+      </div>
+    </div>
+
+    <!-- Web Development Section -->
+    <section class="web-development-hub">
+      <div class="web-container">
+        <div class="web-hero-header" id="heroHeader">
+          <h1>Web Development</h1>
+          <p class="web-subtitle">Crafting modern, responsive, and powerful web experiences that drive business growth</p>
+        </div>
+        
+        <div class="web-services-grid" id="servicesGrid">
+          <div class="web-service-card" data-laptop-msg="Frontend development creates stunning user interfaces with the latest technologies!">
+            <div class="web-service-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Frontend Development</h3>
+            <p>Modern, responsive user interfaces built with React, Vue.js, and Angular, optimized for performance and user experience.</p>
+          </div>
+          
+          <div class="web-service-card" data-laptop-msg="Backend development powers your applications with robust server-side architecture!">
+            <div class="web-service-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>Backend Development</h3>
+            <p>Scalable server-side solutions using Node.js, Python, PHP, and .NET with secure APIs and database integration.</p>
+          </div>
+          
+          <div class="web-service-card" data-laptop-msg="Full-stack development combines frontend and backend expertise for complete solutions!">
+            <div class="web-service-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Full-Stack Development</h3>
+            <p>End-to-end web solutions combining frontend elegance with backend power for comprehensive digital experiences.</p>
+          </div>
+          
+          <div class="web-service-card" data-laptop-msg="E-commerce platforms drive online sales with secure payment integration and inventory management!">
+            <div class="web-service-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>E-commerce Solutions</h3>
+            <p>Custom e-commerce platforms with payment gateways, inventory management, and conversion-optimized user experiences.</p>
+          </div>
+          
+          <div class="web-service-card" data-laptop-msg="CMS development provides easy content management with flexible, user-friendly interfaces!">
+            <div class="web-service-icon">
+              <i class="fas fa-edit"></i>
+            </div>
+            <h3>CMS Development</h3>
+            <p>Custom content management systems and WordPress solutions for easy content updates and website management.</p>
+          </div>
+          
+          <div class="web-service-card" data-laptop-msg="Web optimization ensures fast loading times and excellent search engine rankings!">
+            <div class="web-service-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3>Performance Optimization</h3>
+            <p>Website speed optimization, SEO enhancement, and performance monitoring for better user experience and rankings.</p>
+          </div>
+        </div>
+        
+        <div class="web-technologies-showcase" id="technologiesShowcase" data-laptop-msg="We use cutting-edge technologies to build modern, scalable web applications!">
+          <h2>Technologies & Frameworks</h2>
+          <div class="tech-badges">
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Vue.js</span>
+            <span class="tech-badge">Angular</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">Django</span>
+            <span class="tech-badge">Laravel</span>
+            <span class="tech-badge">MongoDB</span>
+            <span class="tech-badge">PostgreSQL</span>
+            <span class="tech-badge">AWS</span>
+            <span class="tech-badge">Docker</span>
+          </div>
+        </div>
+        
+        <div class="web-workflow-section" id="workflowSection" data-laptop-msg="Our proven development process ensures high-quality websites delivered on time!">
+          <h2>Our Web Development Process</h2>
+          <div class="workflow-timeline">
+            <div class="workflow-stage" data-laptop-msg="Discovery phase: We analyze your requirements and create a detailed project roadmap!">
+              <div class="stage-counter">1</div>
+              <h4>Discovery & Planning</h4>
+              <p>Comprehensive requirement analysis, user research, and technical architecture planning to ensure project success.</p>
+            </div>
+            <div class="workflow-stage" data-laptop-msg="Design phase: We create beautiful, user-friendly designs that convert visitors into customers!">
+              <div class="stage-counter">2</div>
+              <h4>Design & Prototyping</h4>
+              <p>User-centered design with interactive prototypes, wireframes, and pixel-perfect mockups optimized for all devices.</p>
+            </div>
+            <div class="workflow-stage" data-laptop-msg="Development phase: Our expert developers bring your vision to life with clean, efficient code!">
+              <div class="stage-counter">3</div>
+              <h4>Development & Testing</h4>
+              <p>Agile development with continuous integration, automated testing, and quality assurance throughout the process.</p>
+            </div>
+            <div class="workflow-stage" data-laptop-msg="Launch phase: We deploy your website and provide ongoing support and maintenance!">
+              <div class="stage-counter">4</div>
+              <h4>Launch & Support</h4>
+              <p>Website deployment, performance monitoring, security updates, and ongoing maintenance to keep your site running smoothly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+   <div id="social"></div>
+      <div id="chatbot"></div>
+  <div id="footer"></div>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  
+  // Hide loading screen after 2 seconds
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }, 2000);
+  
+  // Create background elements
+  createBackgroundElements();
+  
+  // Initialize laptop companion
+  initLaptopCompanion();
+  
+  // Set up scroll progress tracker
+  window.addEventListener('scroll', updateScrollProgress);
+  
+  // Set up intersection observers
+  setupObservers();
+  
+  // Set up hover effects for service cards
+  setupServiceCardHovers();
+  
+  // Initial laptop greeting
+  setTimeout(() => {
+    laptopSpeak("Welcome to our web development services! Hover over items to learn more about our expertise.");
+  }, 2500);
+});
+
+// Create floating background icons
+function createBackgroundElements() {
+  const bgElements = document.getElementById('backgroundElements');
+  const icons = ['💻', '🌐', '⚡', '🚀', '💡', '🎨', '🔧', '📊', '⚙️', '🔥'];
+  
+  for (let i = 0; i < 30; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'floating-icon';
+    icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+    icon.style.left = Math.random() * 100 + '%';
+    icon.style.top = Math.random() * 100 + '%';
+    icon.style.animationDelay = Math.random() * 8 + 's';
+    icon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    bgElements.appendChild(icon);
+  }
+}
+
+// Laptop speech functionality
+const laptopMouth = document.getElementById('laptopMouth');
+const laptopNotification = document.getElementById('laptopNotification');
+let currentMessage = null;
+
+function laptopSpeak(message, duration = 3500) {
+  if (currentMessage) clearTimeout(currentMessage);
+  
+  laptopNotification.textContent = message;
+  laptopNotification.classList.add('active');
+  laptopMouth.classList.add('speaking');
+  
+  currentMessage = setTimeout(() => {
+    laptopNotification.classList.remove('active');
+    laptopMouth.classList.remove('speaking');
+  }, duration);
+}
+
+// Initialize laptop companion interactions
+function initLaptopCompanion() {
+  const laptopCompanion = document.getElementById('laptopCompanion');
+  
+  // Make laptop draggable
+  let isDragging = false;
+  let offsetX, offsetY;
+  
+  laptopCompanion.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - laptopCompanion.getBoundingClientRect().left;
+    offsetY = e.clientY - laptopCompanion.getBoundingClientRect().top;
+    laptopCompanion.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Constrain to viewport
+    const maxX = window.innerWidth - laptopCompanion.offsetWidth;
+    const maxY = window.innerHeight - laptopCompanion.offsetHeight;
+    
+    laptopCompanion.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+    laptopCompanion.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    laptopCompanion.style.right = 'auto';
+    laptopCompanion.style.transform = 'translateY(0)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    laptopCompanion.style.cursor = 'grab';
+  });
+  
+  // Click to speak random tip
+  laptopCompanion.addEventListener('click', (e) => {
+    if (isDragging) return;
+    
+    const tips = [
+      "Did you know? 94% of first impressions are design-related!",
+      "Mobile accounts for approximately half of web traffic worldwide!",
+      "A 1-second delay in page load time can reduce conversions by 7%!",
+      "Websites with great UX see up to 400% higher conversion rates!",
+      "Users form an opinion about your site in just 0.05 seconds!",
+      "53% of mobile site visits are abandoned if pages take longer than 3 seconds to load!"
+    ];
+    
+    laptopSpeak(tips[Math.floor(Math.random() * tips.length)]);
+  });
+}
+
+// Scroll progress tracking
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+}
+
+// Set up intersection observers for scroll animations
+function setupObservers() {
+  const observerConfig = {
+    threshold: 0.15,
+    rootMargin: '-30px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in', 'slide-in', 'reveal', 'visible');
+        
+        // Laptop speaks when elements come into view
+        const laptopMessage = entry.target.getAttribute('data-laptop-msg');
+        if (laptopMessage) {
+          setTimeout(() => {
+            laptopSpeak(laptopMessage, 4500);
+          }, 600);
+        }
+        
+        // Animate workflow stages with stagger
+        if (entry.target.classList.contains('web-workflow-section')) {
+          const stages = entry.target.querySelectorAll('.workflow-stage');
+          stages.forEach((stage, index) => {
+            setTimeout(() => {
+              stage.classList.add('animate');
+            }, index * 250);
+          });
+        }
+        
+        // Animate service cards with stagger
+        if (entry.target.classList.contains('web-services-grid')) {
+          const cards = entry.target.querySelectorAll('.web-service-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('slide-in');
+            }, index * 200);
+          });
+        }
+      }
+    });
+  }, observerConfig);
+
+  // Observe all sections that need animation
+  document.querySelectorAll('.web-hero-header, .web-service-card, .web-technologies-showcase, .web-workflow-section')
+    .forEach(el => scrollObserver.observe(el));
+}
+
+// Set up hover effects for service cards
+function setupServiceCardHovers() {
+  const serviceCards = document.querySelectorAll('.web-service-card');
+  
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const message = card.getAttribute('data-laptop-msg');
+      if (message) {
+        laptopSpeak(message);
+      }
+    });
+    
+    // Add slight tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angleX = (y - centerY) / 20;
+      const angleY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.05)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+  
+  // Add hover effects to tech badges
+  const techBadges = document.querySelectorAll('.tech-badge');
+  
+  techBadges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      const tech = badge.textContent;
+      const messages = {
+        'React': 'React is a powerful JavaScript library for building user interfaces!',
+        'Vue.js': 'Vue.js is a progressive framework for building interactive web interfaces!',
+        'Angular': 'Angular is a platform for building mobile and desktop web applications!',
+        'Node.js': 'Node.js allows JavaScript to run on the server for scalable network applications!',
+        'Python': 'Python is a versatile language great for backend development and data processing!',
+        'PHP': 'PHP is a widely-used open source scripting language especially suited for web development!',
+        'Django': 'Django is a high-level Python web framework that encourages rapid development!',
+        'Laravel': 'Laravel is a PHP framework with elegant syntax for web artisans!',
+        'MongoDB': 'MongoDB is a popular NoSQL database that stores data in flexible JSON-like documents!',
+        'PostgreSQL': 'PostgreSQL is a powerful open source relational database system!',
+        'AWS': 'Amazon Web Services provides reliable, scalable cloud computing services!',
+        'Docker': 'Docker simplifies application deployment using container virtualization technology!'
+      };
+      
+      if (messages[tech]) {
+        laptopSpeak(messages[tech]);
+      }
+    });
+  });
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  // Reset laptop companion position if it goes off screen
+  const laptopCompanion = document.getElementById('laptopCompanion');
+  const rect = laptopCompanion.getBoundingClientRect();
+  
+  if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+    laptopCompanion.style.left = 'auto';
+    laptopCompanion.style.top = '50%';
+    laptopCompanion.style.right = '40px';
+    laptopCompanion.style.transform = 'translateY(-50%)';
+  }
+});
+      </script>
+   <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects</title>
+    <style>
+        .divlap {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color:#0f0f1b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+             flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+    min-height: 80vh;
+        }
+        
+        .laptop {
+            width: 900px;
+            height: 600px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .screen {
+            width: 840px;
+            height: 500px;
+            background-color: #ffffff;
+            margin: 20px auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .taskbar {
+            height: 40px;
+            background-color: #2d2d2d;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+        }
+        
+        .window {
+            height: 460px;
+            overflow-y: auto;
+        }
+        
+        .window-header {
+            height: 50px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .close-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .project-item:hover {
+            background-color: #f0f5ff;
+            transform: scale(1.05);
+        }
+        
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e1f0ff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #2a7fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .project-name {
+            font-size: 13px;
+            color: #333;
+            word-break: break-word;
+            width: 100%;
+        }
+        
+        .keyboard {
+            width: 880px;
+            height: 20px;
+            background-color: #2d2d2d;
+            margin: 0 auto;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .trackpad {
+            width: 200px;
+            height: 120px;
+            background-color: #2d2d2d;
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+        
+        .base {
+            width: 1000px;
+            height: 20px;
+            background-color: #2d2d2d;
+            margin-top: -10px;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .search-bar {
+            margin-left: auto;
+            background-color: #4a4a4a;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: white;
+            width: 200px;
+        }
+      .projects-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .projects-header h1 {
+    font-size: 2.5rem;
+    color: #4941E2;
+    margin-bottom: 10px;
+  }
+  
+  .projects-header h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  
+  .projects-header p {
+    font-size: 1.1rem;
+    color: #fff;
+    line-height: 1.0;
+  }
+  
+  .laptop-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+@media (max-width: 768px) {
+    .laptop {
+        width: 95vw;
+        height: auto;
+        aspect-ratio: 3/2;
+    }
+    
+    .screen {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 4/3;
+        margin: 10px auto;
+    }
+    
+    .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .project-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .project-name {
+        font-size: 11px;
+    }
+    
+    .keyboard {
+        width: 95%;
+    }
+    
+    .trackpad {
+        width: 150px;
+        height: 80px;
+    }
+    
+    .base {
+        width: 105%;
+    }
+    
+    .search-bar {
+        width: 120px;
+    }
+    
+    .projects-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .projects-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .projects-header p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    
+    .search-bar {
+        width: 100px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="divlap">
+      <div class="projects-header">
+  <h1>Our Web Projects</h1>
+  <h2>Premium Digital Experiences</h2>
+  <p>Explore our portfolio of high-performance websites and web applications</p>
+</div>
+
+<div class="laptop-container">
+    <div class="laptop">
+        <div class="screen">
+            <div class="taskbar">
+                <span>GEINCA</span>
+                <input type="text" class="search-bar" placeholder="Search projects...">
+            </div>
+            <div class="window">
+                <div class="window-header">
+                    <span>Our Projects</span>
+                    <!-- <button class="close-btn">×</button> -->
+                </div>
+                <div class="projects-container">
+                    <!-- Project items will be generated here -->
+                </div>
+            </div>
+        </div>
+        <div class="keyboard"></div>
+        <div class="trackpad"></div>
+        <div class="base"></div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

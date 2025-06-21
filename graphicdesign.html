@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graphic Design Services | CreativeCanvas Solutions</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.divmob {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated background elements */
+.design-bg-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-shape {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.15);
+  animation: floatAround 8s ease-in-out infinite;
+}
+
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  25% { transform: translateY(-30px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+  75% { transform: translateY(-25px) rotate(270deg); opacity: 0.6; }
+}
+
+/* Talking Paintbrush Character */
+/* Talking Paintbrush Character - Now Enhanced Pencil */
+.paintbrush-companion {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  transition: all 0.4s ease;
+  cursor: grab;
+}
+
+.creative-paintbrush {
+  width: 80px;
+  height: 240px;
+  position: relative;
+  animation: brushFloat 4s ease-in-out infinite;
+}
+
+@keyframes brushFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.brush-body {
+  width: 60px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brush-handle {
+  width: 60px;
+  height: 160px;
+  background: linear-gradient(to bottom, #FFD700, #D4AF37);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 3px solid rgba(255,255,255,0.3);
+  border-right: 3px solid rgba(0,0,0,0.1);
+}
+
+/* Pencil wood grain effect */
+.brush-handle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 45%, 
+    rgba(0,0,0,0.05) 45%, 
+    rgba(0,0,0,0.05) 55%, 
+    transparent 55%);
+}
+
+.brush-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  text-align: center;
+  z-index: 2;
+}
+
+.brush-eyes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.brush-eye {
+  width: 10px;
+  height: 10px;
+  background: #2c3e50;
+  border-radius: 50%;
+  animation: brushBlink 5s infinite;
+}
+
+@keyframes brushBlink {
+  0%, 95% { height: 10px; border-radius: 50%; }
+  96%, 100% { height: 2px; border-radius: 5px; }
+}
+
+.brush-mouth {
+  width: 25px;
+  height: 10px;
+  background: #2c3e50;
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto;
+  transition: all 0.2s ease;
+}
+
+.brush-mouth.speaking {
+  animation: brushTalk 0.4s ease infinite alternate;
+}
+
+@keyframes brushTalk {
+  0% { height: 10px; border-radius: 0 0 20px 20px; }
+  100% { height: 5px; border-radius: 10px; }
+}
+
+/* Pencil tip (graphite) */
+.brush-bristles {
+  width: 10px;
+  height: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 40px solid #333;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Pencil eraser */
+.brush-handle::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #FF6B8B;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+  border-bottom: 2px solid #D14D6A;
+  z-index: 1;
+}
+
+/* Metal ferrule between eraser and wood */
+.brush-handle::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #C0C0C0, #E0E0E0, #C0C0C0);
+  z-index: 2;
+}
+
+.brush-notification {
+  position: absolute;
+  top: -50px;
+  right: 140px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 18px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  min-width: 200px;
+  opacity: 0;
+  transform: scale(0.8) translateX(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 14px;
+  color: #333;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.brush-notification::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 20px;
+  border: 8px solid transparent;
+  border-left-color: rgba(255, 255, 255, 0.95);
+}
+
+.brush-notification.active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .paintbrush-companion {
+    right: 20px;
+    transform: translateY(-50%) scale(0.8);
+  }
+  
+  .brush-notification {
+    right: 110px;
+    min-width: 140px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paintbrush-companion {
+    right: 15px;
+    transform: translateY(-50%) scale(0.7);
+  }
+}
+/* Main Design Services Section */
+.design-services-hub {
+  padding: 80px 0 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-right: 160px;
+}
+
+.design-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.design-hero-header {
+  text-align: center;
+  margin-bottom: 70px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.design-hero-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.design-hero-header h1 {
+  font-size: 4rem;
+  background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  font-weight: 900;
+  text-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  line-height: 1.1;
+}
+
+.design-hero-header .design-subtitle {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.design-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  margin-bottom: 70px;
+}
+
+.design-service-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 45px 35px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(50px) rotateX(10deg);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.design-service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.design-service-card:hover::before {
+  left: 100%;
+}
+
+.design-service-card.slide-in {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.design-service-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.design-service-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 30px;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.4s ease;
+  animation: iconBounce 3s ease infinite;
+  position: relative;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.05) rotate(-5deg); }
+}
+
+.design-service-card:hover .design-service-icon {
+  animation-play-state: paused;
+  transform: scale(1.3) rotate(360deg);
+  background: linear-gradient(135deg, #b21f1f, #fdbb2d);
+}
+
+.design-service-icon i {
+  font-size: 40px;
+}
+
+.design-service-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.design-service-card p {
+  color: #7f8c8d;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.design-tools-showcase {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  margin-bottom: 70px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.design-tools-showcase.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.design-tools-showcase h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.tool-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tool-badge {
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(26,42,108,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.tool-badge:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.tool-badge:hover {
+  transform: translateY(-8px) scale(1.1);
+  box-shadow: 0 15px 35px rgba(26,42,108,0.4);
+}
+
+.design-workflow-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 50px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.design-workflow-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.design-workflow-section h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.workflow-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.workflow-stage {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+  position: relative;
+}
+
+.workflow-stage.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stage-counter {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 25px rgba(26,42,108,0.3);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.stage-counter::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #b21f1f, #fdbb2d);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.workflow-stage:hover .stage-counter::before {
+  opacity: 1;
+}
+
+.workflow-stage:hover .stage-counter {
+  transform: scale(1.2) rotate(360deg);
+}
+
+.workflow-stage h4 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.workflow-stage p {
+  color: #7f8c8d;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Progress tracking */
+.scroll-tracker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.2);
+  z-index: 1001;
+}
+
+.scroll-indicator {
+  height: 100%;
+  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Loading animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loading-paintbrush {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  animation: loadingPulse 1.5s ease infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.brush-handle {
+  width: 30px;
+  height: 100px;
+  background: linear-gradient(145deg, #8B4513, #A0522D);
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brush-bristles {
+  width: 60px;
+  height: 30px;
+  background: #FF6347;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 30px 30px;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .paintbrush-companion {
+    right: 20px;
+    transform: translateY(-50%) scale(0.8);
+    position: fixed;
+  }
+
+  .design-services-hub {
+    padding: 60px 0 40px;
+    padding-right: 0;
+  }
+
+  .design-hero-header h1 {
+    font-size: 2.8rem;
+  }
+
+  .design-hero-header .design-subtitle {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+
+  .design-services-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .brush-notification {
+    right: 110px;
+    min-width: 140px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  .design-tools-showcase {
+    padding: 30px 20px;
+  }
+
+  .design-workflow-section {
+    padding: 30px 20px;
+  }
+
+  .workflow-timeline {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paintbrush-companion {
+    right: 15px;
+    transform: translateY(-50%) scale(0.7);
+  }
+
+  .design-hero-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .design-service-card {
+    padding: 30px 20px;
+  }
+
+  .tool-badges {
+    gap: 10px;
+  }
+
+  .tool-badge {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+  </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="divmob">
+  <!-- Loading Screen -->
+  <div class="loading-overlay" id="loadingScreen">
+    <div class="loading-paintbrush">
+      <div class="brush-handle"></div>
+      <div class="brush-bristles"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Tracker -->
+  <div class="scroll-tracker">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="design-bg-elements" id="backgroundElements"></div>
+
+  <!-- Talking Paintbrush Character -->
+  <div class="paintbrush-companion" id="paintbrushCompanion">
+    <div class="creative-paintbrush">
+      <div class="brush-body">
+        <div class="brush-handle">
+          <div class="brush-face">
+            <div class="brush-eyes">
+              <div class="brush-eye"></div>
+              <div class="brush-eye"></div>
+            </div>
+            <div class="brush-mouth" id="brushMouth"></div>
+          </div>
+        </div>
+        <!-- <div class="brush-bristles"></div> -->
+      </div>
+    </div>
+    <div class="brush-notification" id="brushNotification">
+      Welcome to our graphic design services!
+    </div>
+  </div>
+
+  <!-- Graphic Design Services Section -->
+  <section class="design-services-hub">
+    <div class="design-container">
+      <div class="design-hero-header" id="heroHeader">
+        <h1>Graphic Design Services</h1>
+        <p class="design-subtitle">Transform your brand with stunning visual designs that captivate and communicate</p>
+      </div>
+      
+      <div class="design-services-grid" id="servicesGrid">
+        <div class="design-service-card" data-brush-msg="A strong brand identity creates instant recognition and trust!">
+          <div class="design-service-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Brand Identity</h3>
+          <p>Comprehensive branding including logos, color schemes, typography, and brand guidelines.</p>
+        </div>
+        
+        <div class="design-service-card" data-brush-msg="Print materials make your brand tangible and memorable!">
+          <div class="design-service-icon">
+            <i class="fas fa-print"></i>
+          </div>
+          <h3>Print Design</h3>
+          <p>Business cards, brochures, flyers, posters, and other printed marketing materials.</p>
+        </div>
+        
+        <div class="design-service-card" data-brush-msg="Digital designs need to be eye-catching and functional!">
+          <div class="design-service-icon">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <h3>Digital Graphics</h3>
+          <p>Social media graphics, web banners, email templates, and digital advertisements.</p>
+        </div>
+        
+        <div class="design-service-card" data-brush-msg="Packaging design can make or break product success!">
+          <div class="design-service-icon">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <h3>Packaging Design</h3>
+          <p>Creative and functional packaging solutions that stand out on shelves.</p>
+        </div>
+        
+        <div class="design-service-card" data-brush-msg="Infographics make complex information easily digestible!">
+          <div class="design-service-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3>Infographics</h3>
+          <p>Visual representations of data and information that engage and inform.</p>
+        </div>
+        
+        <div class="design-service-card" data-brush-msg="Motion graphics bring static designs to life!">
+          <div class="design-service-icon">
+            <i class="fas fa-film"></i>
+          </div>
+          <h3>Motion Graphics</h3>
+          <p>Animated designs for explainer videos, social media, and digital displays.</p>
+        </div>
+      </div>
+      
+      <div class="design-tools-showcase" id="toolsShowcase" data-brush-msg="We're experts in all the industry-standard design tools!">
+        <h2>Design Tools & Software</h2>
+        <div class="tool-badges">
+          <span class="tool-badge">Adobe Photoshop</span>
+          <span class="tool-badge">Adobe Illustrator</span>
+          <span class="tool-badge">Adobe InDesign</span>
+          <span class="tool-badge">Figma</span>
+          <span class="tool-badge">Sketch</span>
+          <span class="tool-badge">Canva</span>
+          <span class="tool-badge">After Effects</span>
+          <span class="tool-badge">Blender</span>
+        </div>
+      </div>
+      
+      <div class="design-workflow-section" id="workflowSection" data-brush-msg="Our design process ensures creative excellence at every stage!">
+        <h2>Our Design Process</h2>
+        <div class="workflow-timeline">
+          <div class="workflow-stage" data-brush-msg="First we explore your brand and design needs!">
+            <div class="stage-counter">1</div>
+            <h4>Discovery</h4>
+            <p>Understanding your brand, goals, target audience, and project requirements.</p>
+          </div>
+          <div class="workflow-stage" data-brush-msg="Next we brainstorm and sketch initial concepts!">
+            <div class="stage-counter">2</div>
+            <h4>Concept Development</h4>
+            <p>Creating mood boards, sketches, and initial design directions.</p>
+          </div>
+          <div class="workflow-stage" data-brush-msg="Then we refine the selected concept!">
+            <div class="stage-counter">3</div>
+            <h4>Design Refinement</h4>
+            <p>Developing the chosen concept with detailed design execution.</p>
+          </div>
+          <div class="workflow-stage" data-brush-msg="Finally we deliver polished final files!">
+            <div class="stage-counter">4</div>
+            <h4>Final Delivery</h4>
+            <p>Preparing and providing all necessary files in required formats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+   <div id="social"></div>
+      <div id="chatbot"></div>
+<div id="footer"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  
+  // Hide loading screen after 2 seconds
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }, 2000);
+  
+  // Create background elements
+  createBackgroundElements();
+  
+  // Initialize paintbrush companion
+  initPaintbrushCompanion();
+  
+  // Set up scroll progress tracker
+  window.addEventListener('scroll', updateScrollProgress);
+  
+  // Set up intersection observers
+  setupObservers();
+  
+  // Set up hover effects for service cards
+  setupServiceCardHovers();
+  
+  // Initial paintbrush greeting
+  setTimeout(() => {
+    brushSpeak("Welcome to our graphic design services! Hover over items to learn more.");
+  }, 2500);
+});
+
+// Create floating background shapes
+function createBackgroundElements() {
+  const bgElements = document.getElementById('backgroundElements');
+  const shapes = ['✏️', '🎨', '🖌️', '🖍️', '📐', '✂️', '🖼️', '🎭', '🟥', '🟦', '🟨', '🟧'];
+  
+  for (let i = 0; i < 30; i++) {
+    const shape = document.createElement('div');
+    shape.className = 'floating-shape';
+    shape.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    shape.style.left = Math.random() * 100 + '%';
+    shape.style.top = Math.random() * 100 + '%';
+    shape.style.animationDelay = Math.random() * 8 + 's';
+    shape.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    bgElements.appendChild(shape);
+  }
+}
+
+// Paintbrush speech functionality
+const brushMouth = document.getElementById('brushMouth');
+const brushNotification = document.getElementById('brushNotification');
+let currentMessage = null;
+
+function brushSpeak(message, duration = 3500) {
+  if (currentMessage) clearTimeout(currentMessage);
+  
+  brushNotification.textContent = message;
+  brushNotification.classList.add('active');
+  brushMouth.classList.add('speaking');
+  
+  currentMessage = setTimeout(() => {
+    brushNotification.classList.remove('active');
+    brushMouth.classList.remove('speaking');
+  }, duration);
+}
+
+// Initialize paintbrush companion interactions
+function initPaintbrushCompanion() {
+  const paintbrushCompanion = document.getElementById('paintbrushCompanion');
+  
+  // Make paintbrush draggable
+  let isDragging = false;
+  let offsetX, offsetY;
+  
+  paintbrushCompanion.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - paintbrushCompanion.getBoundingClientRect().left;
+    offsetY = e.clientY - paintbrushCompanion.getBoundingClientRect().top;
+    paintbrushCompanion.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Constrain to viewport
+    const maxX = window.innerWidth - paintbrushCompanion.offsetWidth;
+    const maxY = window.innerHeight - paintbrushCompanion.offsetHeight;
+    
+    paintbrushCompanion.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+    paintbrushCompanion.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    paintbrushCompanion.style.right = 'auto';
+    paintbrushCompanion.style.transform = 'translateY(0)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    paintbrushCompanion.style.cursor = 'grab';
+  });
+  
+  // Click to speak random tip
+  paintbrushCompanion.addEventListener('click', (e) => {
+    if (isDragging) return;
+    
+    const tips = [
+      "Did you know? Color increases brand recognition by up to 80%!",
+      "First impressions are 94% design-related!",
+      "Good design can increase conversion rates by 200% or more!",
+      "People remember 65% of visual content compared to 10% of written content!",
+      "The average attention span for visual content is 50 milliseconds!",
+      "Consistent branding across all platforms increases revenue by 23%!"
+    ];
+    
+    brushSpeak(tips[Math.floor(Math.random() * tips.length)]);
+  });
+}
+
+// Scroll progress tracking
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+}
+
+// Set up intersection observers for scroll animations
+function setupObservers() {
+  const observerConfig = {
+    threshold: 0.15,
+    rootMargin: '-30px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in', 'slide-in', 'reveal', 'visible');
+        
+        // Paintbrush speaks when elements come into view
+        const brushMessage = entry.target.getAttribute('data-brush-msg');
+        if (brushMessage) {
+          setTimeout(() => {
+            brushSpeak(brushMessage, 4500);
+          }, 600);
+        }
+        
+        // Animate workflow stages with stagger
+        if (entry.target.classList.contains('design-workflow-section')) {
+          const stages = entry.target.querySelectorAll('.workflow-stage');
+          stages.forEach((stage, index) => {
+            setTimeout(() => {
+              stage.classList.add('animate');
+            }, index * 250);
+          });
+        }
+        
+        // Animate service cards with stagger
+        if (entry.target.classList.contains('design-services-grid')) {
+          const cards = entry.target.querySelectorAll('.design-service-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('slide-in');
+            }, index * 200);
+          });
+        }
+      }
+    });
+  }, observerConfig);
+
+  // Observe all sections that need animation
+  document.querySelectorAll('.design-hero-header, .design-service-card, .design-tools-showcase, .design-workflow-section')
+    .forEach(el => scrollObserver.observe(el));
+}
+
+// Set up hover effects for service cards
+function setupServiceCardHovers() {
+  const serviceCards = document.querySelectorAll('.design-service-card');
+  
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const message = card.getAttribute('data-brush-msg');
+      if (message) {
+        brushSpeak(message);
+      }
+    });
+    
+    // Add slight tilt effect on hover
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angleX = (y - centerY) / 20;
+      const angleY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.05)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+  
+  // Add hover effects to tool badges
+  const toolBadges = document.querySelectorAll('.tool-badge');
+  
+  toolBadges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      const tool = badge.textContent;
+      const messages = {
+        'Adobe Photoshop': 'Photoshop is the industry standard for photo editing and digital painting!',
+        'Adobe Illustrator': 'Illustrator is perfect for vector graphics and logo design!',
+        'Adobe InDesign': 'InDesign is the go-to for layout design and publishing!',
+        'Figma': 'Figma is revolutionizing UI/UX design with its collaborative features!',
+        'Sketch': 'Sketch is a powerful vector design tool for digital interfaces!',
+        'Canva': 'Canva makes professional design accessible to everyone!',
+        'After Effects': 'After Effects brings designs to life with motion graphics!',
+        'Blender': 'Blender is a free and powerful 3D creation suite!'
+      };
+      
+      if (messages[tool]) {
+        brushSpeak(messages[tool]);
+      }
+    });
+  });
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  // Reset paintbrush position if it goes off screen
+  const paintbrushCompanion = document.getElementById('paintbrushCompanion');
+  const rect = paintbrushCompanion.getBoundingClientRect();
+  
+  if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+    paintbrushCompanion.style.left = 'auto';
+    paintbrushCompanion.style.top = '50%';
+    paintbrushCompanion.style.right = '40px';
+    paintbrushCompanion.style.transform = 'translateY(-50%)';
+  }
+});
+</script>
+    
+ <script src="/assets/js/script.js"></script>
+ <script src="/assets/js/comp.js"></script>
+</body>
+</html>
